@@ -15,7 +15,13 @@ const ProductCard = ({ product, loading }) => {
             <Badge colorScheme='yellow'>only {product.stock} left</Badge>
         ) : product.stock < 1 ? (
             <Badge colorScheme='red'>Sold out</Badge>
-        ) : <Badge colorScheme='green'>In Stock</Badge>}
+        ) : ( <Badge colorScheme='green'>In Stock</Badge>
+    )}
+    {product.productIsNew && (
+        <Badge ml='2' colorscheme='purple'>
+            new
+        </Badge>
+    )}
     </Box>
   </Skeleton>;
 };
