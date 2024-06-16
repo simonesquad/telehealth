@@ -5,31 +5,26 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "server": "node server/index.js",
+    "start": "node server/index",
     "client": "npm run start --prefix client",
+    "build": "cd client && npm install && npm run build",
+    "server": "node server/index.js",
     "app": "concurrently npm \"npm run server\" \"npm run client\""
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@chakra-ui/react": "^2.8.2",
-    "@emotion/react": "^11.11.4",
-    "@emotion/styled": "^11.11.5",
     "bcryptjs": "^2.4.3",
-    "concurrently": "^8.2.2",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "express-async-handler": "^1.2.0",
-    "framer-motion": "^11.1.7",
     "jsonwebtoken": "^9.0.2",
-    "jwt-decode": "^4.0.0",
-    "mongoose": "^8.3.2",
-    "nodemailer": "^6.9.13",
-    "stripe": "^15.3.0"
+    "mongoose": "^8.3.2"
   },
   "devDependencies": {
-    "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "concurrently": "^8.2.2"
   }
 }
