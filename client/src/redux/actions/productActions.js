@@ -5,7 +5,7 @@ import axios from 'axios';
 export const getProducts = (page, favoriteToggle) => async (dispatch) => {
     dispatch(setLoading());
     try {
-        const { data } = await axios.get(`/api/productsWRONG/${page}/${10}`)
+        const { data } = await axios.get(`/api/products`)
         const { products, pagination } = data;
         dispatch(setProducts(products));
         dispatch(setPagination(pagination));

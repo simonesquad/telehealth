@@ -17,6 +17,7 @@ import NavLink from './NavLink';
 import ColorModeToggle from './ColorModeToggle';
 import {BiUserCheck} from 'react-icons/bi';
 import { toggleFavorites } from '../redux/actions/productActions';
+import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 
 
 const Links = [
@@ -39,7 +40,12 @@ const Header = () => {
 
             <Flex h='16' alignItems='center' justifyContent='space-between'>
                 <Flex display={{base: 'flex', md: 'none'}} alignItems='center'>
-                    <IconButton bg='parent' size='md' icon={isOpen? onClose : onOpen}/>
+                    <IconButton 
+                        bg='parent' 
+                        size='md' 
+                        icon={isOpen ? <CloseIcon /> : <HamburgerIcon />} 
+                        onClick={isOpen ? onClose : onOpen}
+                    />
                 </Flex>
                 <HStack spacing='8' alignItems='center'>
                     <Box alignItems='center' display='flex' as={ReactLink} to='/'>
@@ -52,10 +58,7 @@ const Header = () => {
                             <NavLink route={link.route} key={link.route}><Text fontWeight='medium'>{link.name}</Text>{' '}</NavLink>
                         ))}
                         <ColorModeToggle />
-                    </HStack>
-                </HStack>
-            </Flex>
-{/*             
+            
         {favoritesToggled ? (
             <IconButton 
                 onClick={() => dispatch(toggleFavorites(false))}
@@ -68,10 +71,37 @@ const Header = () => {
                 icon={ <MdOutlineFavorite size='20px' />}
                 variant='ghost'
             />
-        )} */}
-  </Box>
-
-    );
-};
+        )}
+            </HStack>
+        </HStack>
+        <Flex alignItems='center'><BiUserCheck /></Flex>
+    </Flex>
+    <Box display='flex'>
+                    {isOpen && (
+                        <Box pb='4' display={{md: 'none'}}>
+                            <Stack as='nav' spacing='4'> {Links.map((link) => (
+                                <NavLink route={link.route} key={link.route}><Text fontWeight='medium'>{link.name}</Text></NavLink>
+                            ))}
+                            </Stack>
+                            {favoritesToggled ? (
+                                <IconButton 
+                                    onClick={() => dispatch(toggleFavorites(false))}
+                                    icon={ <MdOutlineFavorite size='20px' />}
+                                    variant='ghost'
+                                />
+                            ) : (
+                                <IconButton 
+                                    onClick={() => dispatch(toggleFavorites(true))}
+                                    icon={ <MdOutlineFavorite size='20px' />}
+                                    variant='ghost'
+                                />
+                            )}
+                            <ColorModeToggle />
+                        </Box>
+                    )}
+                </Box>
+            </Box>
+        );
+    };
 
 export default Header;
