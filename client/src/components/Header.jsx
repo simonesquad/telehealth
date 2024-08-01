@@ -7,7 +7,7 @@ import { toggleFavorites } from '../redux/actions/productActions';
 
 const Header = () => {
     const dispatch = useDispatch()
-    const {favoritesToggled} = useSelector((state) => state.product)
+    const {favoritesToggled} = useSelector((state) => state.product);
 
 
     return (
