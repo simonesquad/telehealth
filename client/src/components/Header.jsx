@@ -15,7 +15,7 @@ import { MdOutlineFavorite, MdOutlineFavoriteBorder } from 'react-icons/md';
 import { useDispatch, useSelector } from 'react-redux';
 import NavLink from './NavLink';
 import ColorModeToggle from './ColorModeToggle';
-import {BiUserCheck} from 'react-icons/bi';
+import { BiUserCheck } from 'react-icons/bi';
 import { toggleFavorites } from '../redux/actions/productActions';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 
@@ -28,9 +28,9 @@ const Links = [
 ];
 
 const Header = () => {
-    const {isOpen, onOpen, onClose} = useDisclosure();
+    const { isOpen, onOpen, onClose } = useDisclosure();
     const dispatch = useDispatch()
-    const {favoritesToggled} = useSelector((state) => state.product);
+    const { favoritesToggled } = useSelector((state) => state.product);
 
     useEffect(() => {}, [favoritesToggled, dispatch]);
 
@@ -48,14 +48,14 @@ const Header = () => {
                     />
                 </Flex>
                 <HStack spacing='8' alignItems='center'>
-                    <Box alignItems='center' display='flex' as={ReactLink} to='/'>
+                    <Box alignItems='center' display='flex' as={ReactLink} to='/'>s
                         <Icon as={BsPhoneFlip} h='6' w='6' color={mode('black', 'yellow.200')} />
                         <Text as ='b'>Telehealth</Text>
                     </Box>
 
                     <HStack as='nav' spacing='4' display={{ base: 'none', md: 'flex' }}>
                         {Links.map((link) => (
-                            <NavLink route={link.route} key={link.route}><Text fontWeight='medium'>{link.name}</Text>{' '}</NavLink>
+                            <NavLink route={link.route} key={link.route}><Text fontWeight='medium'>{link.name}</Text></NavLink>
                         ))}
                         <ColorModeToggle />
             
