@@ -75,6 +75,39 @@ const ProductScreen = () => {
                 <Heading fontSize='2xl'fontWeight='extrabold'>       
                 {product.brand} {product.name}
                 </Heading>
+                  <Stack spacing='5'>
+                    <Box>
+                        <Text fontSize='xl'>${product.price}</Text>
+                        <Flex>
+                          <HStack spacing='2px'>
+                            <Star color='cyan.500'></Star>
+                            <Star rating={product.rating} star={2} />
+                            <Star rating={product.rating} star={3} />
+                            <Star rating={product.rating} star={4} />
+                            <Star rating={product.rating} star={5} />
+                          </HStack>
+                          <Text fontSize='md' fontWeight='bold' ml='4px'>
+                            {product.numberOfReviews} Reviews
+                          </Text>
+                        </Flex>
+                    </Box>
+                    <Text>{product.subtitle}</Text>
+                    <Text>{product.description}</Text>
+                    <Text fontWeight='bold'>Quantity</Text>
+                    <Flex w='170px' p='5px' border='1px' borderColor='gray.200' alignItems='center'>
+                      <Button isDisabled={amount <= product.stock} onClick={() => changeAmount('plus')}>
+                        <SmallAddIcon />
+                      </Button>
+                      <Text mx='30px'>{amount}</Text>
+                    </Flex>
+                    <Badge fontSize='lg' width='170px' textAlign='center' colorScheme='grey'>In Stock: {product.stock}
+                    </Badge>
+                    <Button variant='outline' isDisabled={product.stock === 0} colorScheme='cyan'>
+                      Add to cart
+                    </Button>
+                  </Stack>
+
+
               </Stack>
             </Box>
         )
