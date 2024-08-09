@@ -26,9 +26,9 @@ import Star from '../components/Star';
 
 const ProductScreen = () => {
   const [amount, setAmount] = useState(1);
-  const {id} = useParams()
-  const dispatch = useDispatch()
-  const {loading, error, product} = useSelector((state) => state.product)
+  const {id} = useParams();
+  const dispatch = useDispatch();
+  const {loading, error, product} = useSelector((state) => state.product);
 
   useEffect(() => {
     dispatch(getProduct(id));
@@ -64,6 +64,7 @@ const ProductScreen = () => {
             px={{base: '4', md: '6', lg: '12'}} 
             py={{base: '4', md: '6', lg: '12'}}>
               <Stack direction={{base: 'column', lg: 'row' }} align='flex-start'>
+                <Stack pr={{ base: '0', md: 'row' }} flex='1.5' mb={{ base: '12', md: 'none' }}>
                 {product.productIsNew && (
                   <Badge p='2' rounded='md' w='50px' fontSize='0.8em' colorScheme='green'>New</Badge>
                 )}
@@ -105,11 +106,10 @@ const ProductScreen = () => {
                     <Button variant='outline' isDisabled={product.stock === 0} colorScheme='cyan'>
                       Add to cart
                     </Button>
-                  </Stack>
-
-
-              </Stack>
-            </Box>
+                    </Stack>
+                </Stack>
+            </Stack>
+          </Box>
         )
       )}
   </Wrap>

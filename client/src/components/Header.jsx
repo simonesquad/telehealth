@@ -48,7 +48,7 @@ const Header = () => {
                     />
                 </Flex>
                 <HStack spacing='8' alignItems='center'>
-                    <Box alignItems='center' display='flex' as={ReactLink} to='/'>s
+                    <Box alignItems='center' display='flex' as={ReactLink} to='/'>
                         <Icon as={BsPhoneFlip} h='6' w='6' color={mode('black', 'yellow.200')} />
                         <Text as ='b'>Telehealth</Text>
                     </Box>

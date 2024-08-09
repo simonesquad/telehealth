@@ -4,12 +4,15 @@ import React, { useState } from 'react';
 import { addToFavorites, removeFromFavorites } from '../redux/actions/productActions';
 import { useSelector, useDispatch } from 'react-redux';
 import { MdOutlineFavorite, MdOutlineFavoriteBorder } from 'react-icons/md';
-import { Link as ReactLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const ProductCard = ({ product, loading }) => {
     const dispatch = useDispatch();
     const { favorites } = useSelector((state) => state.product);
     const [isShown, setIsShown] = useState(false);
+    const navigate = useNavigate();
+    const { id } = useParams(product._id);
 
   return (
     <Skeleton isLoaded={!loading} _hover={{ size: 1.5 }}>
@@ -22,7 +25,7 @@ const ProductCard = ({ product, loading }) => {
             <Image 
                 onMouseEnter={() => setIsShown(true)}
                 onMouseLeave={() => setIsShown(false)}
-                src={product.images[isShown & product.images.length === 2 ? 1 : 0]} 
+                src={product.images[isShown && product.images.length === 2 ? 1 : 0]} 
                 fallbackSrc='https://via.placeholder.com/150' 
                 alt={product.name} 
                 height='200px'
@@ -66,13 +69,12 @@ const ProductCard = ({ product, loading }) => {
                     onClick={(() => dispatch(addToFavorites(product._id)))}
                 />
             )}
-
             <IconButton 
                 icon={<BiExpand size='20' />} 
-                as={ReactLink} 
-                to={`/product/${product._id}`} 
                 colorScheme='cyan' 
-                size='sm' />
+                size='sm' 
+                onClick={(() => navigate(`/product/${id}`))}
+            />
         </Flex>
     </Box>
     </Skeleton>
