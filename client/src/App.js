@@ -1,9 +1,10 @@
 import { ChakraProvider } from '@chakra-ui/react';
-import ProductsScreen from './screens/ProductsScreen';
 import {Route, BrowserRouter as Router, Routes} from 'react-router-dom';
 import Header from './components/Header';
+// screens //
 import LandingScreen from './screens/LandingScreen';
-import ProductScreen from './screens/ProductsScreen';
+import ProductScreen from './screens/ProductScreen';
+import ProductsScreen from './screens/ProductsScreen';
 
 function App() {
   return (

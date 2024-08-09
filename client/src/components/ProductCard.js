@@ -5,14 +5,14 @@ import { addToFavorites, removeFromFavorites } from '../redux/actions/productAct
 import { useSelector, useDispatch } from 'react-redux';
 import { MdOutlineFavorite, MdOutlineFavoriteBorder } from 'react-icons/md';
 import { Link } from 'react-router-dom';
-import { useNavigate, useParams } from 'react-router-dom';
+// import { useNavigate, useParams } from 'react-router-dom';
 
 const ProductCard = ({ product, loading }) => {
     const dispatch = useDispatch();
     const { favorites } = useSelector((state) => state.product);
     const [isShown, setIsShown] = useState(false);
-    const navigate = useNavigate();
-    const { id } = useParams(product._id);
+    // const navigate = useNavigate();
+    // const { id } = useParams(product._id);
 
   return (
     <Skeleton isLoaded={!loading} _hover={{ size: 1.5 }}>
@@ -69,12 +69,14 @@ const ProductCard = ({ product, loading }) => {
                     onClick={(() => dispatch(addToFavorites(product._id)))}
                 />
             )}
+        <Link to={`/product/${product._id}`}>
             <IconButton 
                 icon={<BiExpand size='20' />} 
                 colorScheme='cyan' 
                 size='sm' 
-                onClick={(() => navigate(`/product/${id}`))}
+                // onClick={(() => navigate(`/product/${id}`))}
             />
+        </Link>
         </Flex>
     </Box>
     </Skeleton>
