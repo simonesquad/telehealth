@@ -126,11 +126,27 @@ const ProductScreen = () => {
               <Flex direction='column' align='center' flex='1' _dark={{bg: 'gray.900'}}>
                 <Image 
                   mb='30px' 
-                  src={product.image[0]} 
+                  src={product.images[0]} 
+                  alt={product.name} 
+                  fallbackSrc='https://via.placeholder.com/250' 
+                />
+                <Image 
+                  mb='30px' 
+                  src={product.images[1]} 
                   alt={product.name} 
                   fallbackSrc='https://via.placeholder.com/250' 
                 />
               </Flex>
+          </Stack>
+          <Stack>
+            <Text fontSize='xl' fontWeight='bold'>
+              Reviews
+            </Text>
+            <SimpleGrid minChildWidth='300px' spacingX='40px' spacingY='200px'>
+              {product.reviews.map((review) => (
+                <Box key={review._id}></Box>
+              ))}
+            </SimpleGrid>
           </Stack>
         </Box>
         )
