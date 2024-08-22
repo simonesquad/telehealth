@@ -96,20 +96,23 @@ const ProductScreen = () => {
                     <Text>{product.description}</Text>
                     <Text fontWeight='bold'>Quantity</Text>
                     <Flex w='170px' p='5px' border='1px' borderColor='gray.200' alignItems='center'>
-                      <Button isDisabled={amount <= product.stock} onClick={() => changeAmount('plus')}>
+                    <Button isDisabled={amount <= 1} onClick={() => changeAmount('minus')}>
+                        <MinusIcon />
+                      </Button> 
+                    <Text mx='30px'>{amount}</Text>
+                      <Button isDisabled={amount >= product.stock} onClick={() => changeAmount('plus')}>
                         <SmallAddIcon />
-                      </Button>
-                      <Text mx='30px'>{amount}</Text>
+                      </Button> 
                     </Flex>
                     <Badge fontSize='lg' width='170px' textAlign='center' colorScheme='grey'>In Stock: {product.stock}
                     </Badge>
                     <Button variant='outline' isDisabled={product.stock === 0} colorScheme='cyan'>
                       Add to cart
                     </Button>
-                    </Stack>
-                </Stack>
-            </Stack>
-          </Box>
+                  </Stack>
+              </Stack>
+          </Stack>
+        </Box>
         )
       )}
   </Wrap>
