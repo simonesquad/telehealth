@@ -109,8 +109,28 @@ const ProductScreen = () => {
                     <Button variant='outline' isDisabled={product.stock === 0} colorScheme='cyan'>
                       Add to cart
                     </Button>
+                    <Stack width='270px'>
+                      <Flex alignItems='center'>
+                        <BiPackage size='20px'/>
+                      </Flex>
+
+                      <Flex alignItems='center'>
+                        <BiSupport size='20px' />
+                        <Text fontWeight='medium' fontSize='sm' ml='2'>
+                          We're here for you 24/7
+                          </Text>
+                        </Flex>
+                    </Stack>
                   </Stack>
               </Stack>
+              <Flex direction='column' align='center' flex='1' _dark={{bg: 'gray.900'}}>
+                <Image 
+                  mb='30px' 
+                  src={product.image[0]} 
+                  alt={product.name} 
+                  fallbackSrc='https://via.placeholder.com/250' 
+                />
+              </Flex>
           </Stack>
         </Box>
         )
