@@ -144,7 +144,22 @@ const ProductScreen = () => {
             </Text>
             <SimpleGrid minChildWidth='300px' spacingX='40px' spacingY='200px'>
               {product.reviews.map((review) => (
-                <Box key={review._id}></Box>
+                <Box key={review._id}>
+                  <Flex spacing='2px' alignItems='center'>
+                    <Star color='cyan.500' />
+                      <Star rating={product.rating} star={2} />
+                      <Star rating={product.rating} star={3} />
+                      <Star rating={product.rating} star={4} />
+                      <Star rating={product.rating} star={5} />
+                      <Text fontWeight='semibold' ml='4px'>
+                        {review.title && review.title}
+                      </Text>
+                  </Flex>
+                  <Box py='12px'>{review.comment}</Box>
+                  <Text fontSize='sm' color='gray.400'>
+                    by {review.name}, {new Date(review.createdAt).toDateString()}
+                  </Text>
+                </Box>
               ))}
             </SimpleGrid>
           </Stack>
