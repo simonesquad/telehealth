@@ -18,6 +18,7 @@ import ColorModeToggle from './ColorModeToggle';
 import { BiUserCheck } from 'react-icons/bi';
 import { toggleFavorites } from '../redux/actions/productActions';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
+import { TbShoppingCart } from 'react-icons/tb';
 
 
 const Links = [
@@ -31,6 +32,7 @@ const Header = () => {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const dispatch = useDispatch()
     const { favoritesToggled } = useSelector((state) => state.product);
+    const { cartItems } = useSelector((state) => state.cart);
 
     useEffect(() => {}, [favoritesToggled, dispatch]);
 
@@ -46,6 +48,22 @@ const Header = () => {
                         icon={isOpen ? <CloseIcon /> : <HamburgerIcon />} 
                         onClick={isOpen ? onClose : onOpen}
                     />
+                    <IconButton 
+                        ml='12' 
+                        position='absolute' 
+                        icon={<TbShoppingCart size='20px' />}
+                        as={ReactLink}
+                        to='/cart'
+                        variant='ghost'
+                    />
+                    {cartItems.length > 0 && (
+                        <Text 
+                            fontWeight='bold' fontStyle='italic' position='absolute'
+                            ml='74px'
+                            mt='-6'
+                            fontSize='sm'
+                        >{cartItems.length}</Text>
+                    )}
                 </Flex>
                 <HStack spacing='8' alignItems='center'>
                     <Box alignItems='center' display='flex' as={ReactLink} to='/'>
@@ -57,6 +75,27 @@ const Header = () => {
                         {Links.map((link) => (
                             <NavLink route={link.route} key={link.route}><Text fontWeight='medium'>{link.name}</Text></NavLink>
                         ))}
+
+                        <Box>
+                            <IconButton 
+                                ml='12' 
+                                position='absolute' 
+                                icon={<TbShoppingCart size='20px' />}
+                                as={ReactLink}
+                                to='/cart'
+                                variant='ghost'
+                            />
+                            {cartItems.length > 0 && (
+                            <Text 
+                                fontWeight='bold' fontStyle='italic' position='absolute'
+                                ml='26px'
+                                mt='-6'
+                                fontSize='sm'
+                                >{cartItems.length}
+                            </Text>
+                            )}
+                        </Box>
+
                         <ColorModeToggle />
             
         {favoritesToggled ? (
