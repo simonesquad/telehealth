@@ -23,12 +23,17 @@ import { useParams } from 'react-router-dom';
 import { getProduct } from '../redux/actions/productActions';
 import { useEffect, useState } from 'react';
 import Star from '../components/Star';
+import { addCartItem } from '../redux/actions/cartActions';
+import { useToast } from '@chakra-ui/react';
 
 const ProductScreen = () => {
   const [amount, setAmount] = useState(1);
   const {id} = useParams();
   const dispatch = useDispatch();
   const {loading, error, product} = useSelector((state) => state.product);
+  const toast = useToast();
+  const { cartItems } = useSelector((state) => state.cart);
+  // const [cartPlusDisabled, setCartPlusDisabled] = useState(false);
 
   useEffect(() => {
     dispatch(getProduct(id));
@@ -42,6 +47,20 @@ const ProductScreen = () => {
     if (input === 'minus') {
       setAmount(amount - 1);
     }
+  };
+
+  const addItem = (id) => {
+    if (cartItems.some((cartItem) => cartItem.id === id)) {
+      cartItems.find((cartItem) => cartItem.id === id);
+      dispatch(addCartItem(id, amount));
+    } else {
+      dispatch(addCartItem(id, amount));
+    }
+    toast({
+      description: 'Item has been added.',
+      status: 'success',
+      isClosable: true,
+    });
   };
 
   return (

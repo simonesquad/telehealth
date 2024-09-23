@@ -1,18 +1,43 @@
-import { Box, Image, Text, Badge, Flex, IconButton, Skeleton } from '@chakra-ui/react';
+import { Box, Image, Text, Badge, Flex, IconButton, Skeleton, useToast, Tooltip } from '@chakra-ui/react';
 import { BiExpand } from 'react-icons/bi';
 import React, { useState } from 'react';
 import { addToFavorites, removeFromFavorites } from '../redux/actions/productActions';
 import { useSelector, useDispatch } from 'react-redux';
 import { MdOutlineFavorite, MdOutlineFavoriteBorder } from 'react-icons/md';
 import { Link } from 'react-router-dom';
-// import { useNavigate, useParams } from 'react-router-dom';
+import { addCartItem } from '../redux/actions/cartActions';
+import { useEffect } from 'react';
+import { TbShoppingCartPlus } from 'react-icons/tb';
+
 
 const ProductCard = ({ product, loading }) => {
     const dispatch = useDispatch();
     const { favorites } = useSelector((state) => state.product);
     const [isShown, setIsShown] = useState(false);
-    // const navigate = useNavigate();
-    // const { id } = useParams(product._id);
+    const { cartItems } = useSelector((state) => state.cart);
+    const toast = useToast();
+    const [cartPlusDisabled, setCartPlusDisabled] = useState(false);
+
+    useEffect(() => {
+        const item = cartItems.find((cartItem) => cartItem.id === product.id);
+        if(item && item.qty === product.stock) {
+            setCartPlusDisabled(true);
+        }
+    }, [product, cartItems]);
+
+    const addItem = (id) => {
+        if (cartItems.some((cartItem) => cartItem.id === id)) {
+          const item = cartItems.find((cartItem) => cartItem.id === id);
+          dispatch(addCartItem(id, item.qty + 1));
+        } else {
+          dispatch(addCartItem(id, 1));
+        }
+        toast({
+          description: 'Item has been added.',
+          status: 'success',
+          isClosable: true,
+        });
+      };
 
   return (
     <Skeleton isLoaded={!loading} _hover={{ size: 1.5 }}>
@@ -74,8 +99,26 @@ const ProductCard = ({ product, loading }) => {
                 icon={<BiExpand size='20' />} 
                 colorScheme='cyan' 
                 size='sm' 
-                // onClick={(() => navigate(`/product/${id}`))}
             />
+
+            <Tooltip 
+                isDisabled={!cartPlusDisabled} 
+                hasArrow 
+                label={
+                    !cartPlusDisabled 
+                        ? 'You reached the maximum quantity jof the product. '
+                        : product.stock <= 0
+                        ? 'Out of stock'
+                        : ''
+            }>
+                <IconButton 
+                    isDisabled={product.stock <= 0 || cartPlusDisabled} 
+                    onClick={() => addItem(product._id)} 
+                    icon={<TbShoppingCartPlus size='20' />} 
+                    colorScheme='cyan'
+                    size='sm'
+                />
+            </Tooltip>
         </Link>
         </Flex>
     </Box>
