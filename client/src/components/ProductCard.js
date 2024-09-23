@@ -100,13 +100,14 @@ const ProductCard = ({ product, loading }) => {
                 colorScheme='cyan' 
                 size='sm' 
             />
+        </Link>
 
             <Tooltip 
                 isDisabled={!cartPlusDisabled} 
                 hasArrow 
                 label={
                     !cartPlusDisabled 
-                        ? 'You reached the maximum quantity jof the product. '
+                        ? 'You reached the maximum quantity of the product. '
                         : product.stock <= 0
                         ? 'Out of stock'
                         : ''
@@ -119,7 +120,7 @@ const ProductCard = ({ product, loading }) => {
                     size='sm'
                 />
             </Tooltip>
-        </Link>
+        
         </Flex>
     </Box>
     </Skeleton>
