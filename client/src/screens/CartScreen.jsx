@@ -44,7 +44,33 @@ const CartScreen = () => {
                 </AlertDescription>
               </Alert>
             ) : (
-                <p>display cart</p>
+                <Box px='4' py='8' w={{base: '95%', md: '70%', lg: '50%'}}>
+                    <Stack 
+                        direction={{ base: 'column', lg: 'row' }}
+                        align={{ lg: 'flex-start' }}
+                        spacing={{ base: '8', md: '16' }}>
+                            <Stack spacing={{base: '8', md: '10'}} flex='2'>
+                                <Heading 
+                                    fontSize='2xl' fontWeight='extrabold'>
+                                        Shopping Cart
+                                </Heading>
+
+                                <Stack spacing='6'>
+                                    {cartItems.map((cartItem) => (
+                                        <CartItem key={cartItem.id} cartItem={cartItem} />
+                                    ))}
+                                </Stack>
+                            </Stack>
+                            <Flex direction='column' align='center' flex='1'>
+                                <OrderSummary />
+
+                                <HStack mt='6' fontWeight='semibold'>
+                                    <p>or</p>
+                                    <Link as={ReactLink} to='/products' color={mode('cyan.500', 'cyan.200')}>Continue Shopping</Link>
+                                </HStack>
+                            </Flex>
+                    </Stack>
+                </Box>
             )}
         </Wrap>
     );
