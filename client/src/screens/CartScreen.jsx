@@ -3,7 +3,6 @@ import {
     Flex,
     Heading,
     HStack,
-    Link,
     Stack,
     useColorModeValue as mode,
     Spinner,
@@ -13,7 +12,7 @@ import {
     Wrap,
     AlertTitle,
 } from '@chakra-ui/react';
-import { Link as ReactLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import CartItem from '../components/CartItem';
 import OrderSummary from '../components/OrderSummary';
@@ -38,7 +37,7 @@ const CartScreen = () => {
                 <AlertIcon />
                 <AlertTitle>Your cart is empty.</AlertTitle>
                 <AlertDescription>
-                    <Link as={ReactLink} to='/products'>
+                    <Link to='/products'>
                         Click here to see your products.
                     </Link>
                 </AlertDescription>
@@ -66,7 +65,10 @@ const CartScreen = () => {
 
                                 <HStack mt='6' fontWeight='semibold'>
                                     <p>or</p>
-                                    <Link as={ReactLink} to='/products' color={mode('cyan.500', 'cyan.200')}>Continue Shopping</Link>
+                                    <Link 
+                                        to='/products'>
+                                        Continue Shopping
+                                    </Link>
                                 </HStack>
                             </Flex>
                     </Stack>
