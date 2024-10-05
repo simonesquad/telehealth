@@ -55,18 +55,23 @@ const CartScreen = () => {
                                 </Heading>
 
                                 <Stack spacing='6'>
-                                    {cartItems.map((cartItem) => (
-                                        <CartItem key={cartItem.id} cartItem={cartItem} />
-                                    ))}
+                                    {cartItems.map((cartItem) => {
+                                        <CartItem key={cartItem.id} cartItem={cartItem} />;
+                                    })}
                                 </Stack>
                             </Stack>
+
                             <Flex direction='column' align='center' flex='1'>
-                                <OrderSummary />
+                                {/* {(
+                                    <OrderSummary />
+                                )}; */}
 
                                 <HStack mt='6' fontWeight='semibold'>
                                     <p>or</p>
                                     <Link 
-                                        to='/products'>
+                                        to='/products'
+                                        color={mode('cyan.500', 'cyan.200')}
+                                    >
                                         Continue Shopping
                                     </Link>
                                 </HStack>

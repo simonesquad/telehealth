@@ -19,7 +19,7 @@ const ProductCard = ({ product, loading }) => {
     const [cartPlusDisabled, setCartPlusDisabled] = useState(false);
 
     useEffect(() => {
-        const item = cartItems.find((cartItem) => cartItem.id === product.id);
+        const item = cartItems.find((cartItem) => cartItem.id === product._id);
         if(item && item.qty === product.stock) {
             setCartPlusDisabled(true);
         }
@@ -120,7 +120,6 @@ const ProductCard = ({ product, loading }) => {
                     size='sm'
                 />
             </Tooltip>
-        
         </Flex>
     </Box>
     </Skeleton>
