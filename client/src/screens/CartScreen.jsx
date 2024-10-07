@@ -65,11 +65,6 @@ const CartScreen = () => {
                                 
                                     {/* <OrderSummary /> */}
 
-                                    {/* Render order summary */}
-
-                                    
-                        
-
                                 <HStack mt='6' fontWeight='semibold'>
                                     <p>or</p>
                                     <Link 

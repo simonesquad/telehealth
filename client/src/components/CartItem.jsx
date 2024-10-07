@@ -1,4 +1,13 @@
-import {CloseButton, Flex, Image, Select, Spacer, Text, VStack, useColorModeValue as mode } from '@chakra-ui/react';
+import {
+  CloseButton, 
+  Flex, 
+  Image, 
+  Select, 
+  Spacer, 
+  Text, 
+  VStack, 
+  useColorModeValue as mode 
+} from '@chakra-ui/react';
 import { useDispatch } from 'react-redux';
 import { addCartItem, removeCartItem } from '../redux/actions/cartActions';
 
@@ -27,7 +36,8 @@ const CartItem = ({ cartItem }) => {
             dispatch(addCartItem(id, e.target.value));
           }}>
             {[...Array(stock).keys()].map((item) => (
-              <option key={item + 1} value={item + 1}>    {item + 1}
+              <option key={item + 1} value={item + 1}>    
+              {item + 1}
               </option>
             ))}
           </Select>
