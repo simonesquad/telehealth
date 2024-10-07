@@ -64,6 +64,10 @@ const CartScreen = () => {
                             <Flex direction='column' align='center' flex='1'>
                                 
                                     {/* <OrderSummary /> */}
+
+                                    {/* Render order summary */}
+
+                                    
                         
 
                                 <HStack mt='6' fontWeight='semibold'>

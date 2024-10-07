@@ -36,6 +36,7 @@ function OrderSummary() {
             
           </Flex>
         </Stack>
+        
         <Link to='/checkout'>
           <Button 
             colorScheme='cyan' 
