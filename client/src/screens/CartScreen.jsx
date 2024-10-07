@@ -1,5 +1,6 @@
 import {
     Box,
+    Button,
     Flex,
     Heading,
     HStack,
@@ -11,14 +12,16 @@ import {
     AlertDescription,
     Wrap,
     AlertTitle,
+    Text
 } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { FaArrowRight } from 'react-icons/fa';
 import CartItem from '../components/CartItem';
-import OrderSummary from '../components/OrderSummary';
+// import OrderSummary from '../components/OrderSummary';
 
 const CartScreen = () => {
-    const { loading, error, cartItems } = useSelector((state) => state.cart);
+    const { loading, error, cartItems, subtotal, shipping } = useSelector((state) => state.cart);
 
     const getHeadingContent = () => (cartItems.length === 1 ? '(1 Item)' : `(${cartItems.length} Items)`);
 
@@ -56,7 +59,8 @@ const CartScreen = () => {
 
                                 <Stack spacing='6'>
                                     {cartItems.map((cartItem) => (
-                                        <CartItem key={cartItem.id} cartItem={cartItem} />
+                                        <CartItem key={cartItem.id} 
+                                        cartItem={cartItem} />
                                     ))}
                                 </Stack>
                             </Stack>
@@ -64,6 +68,18 @@ const CartScreen = () => {
                             <Flex direction='column' align='center' flex='1'>
                                 
                                     {/* <OrderSummary /> */}
+                                    {/* <Text fontWeight='medium'>
+                                    {subtotal} {shipping}
+                                     </Text> */}
+                                    <Link to='/checkout'>
+                                        <Button 
+                                            colorScheme='cyan' 
+                                            size='lg' 
+                                            rightIcon={<FaArrowRight />}
+                                            >
+                                            Checkout
+                                        </Button>
+                                    </Link>
 
                                 <HStack mt='6' fontWeight='semibold'>
                                     <p>or</p>
