@@ -5,14 +5,13 @@ import {
     HStack,
     Icon,
     Image,
-    Link,
     Skeleton,
     Stack,
     useColorModeValue as mode,
     Text,
 } from '@chakra-ui/react';
 import { FaArrowRight } from 'react-icons/fa';
-import { Link as ReactLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { BsPhoneFlip } from 'react-icons/bs';
 
 const LandingScreen = () => (
@@ -37,7 +36,7 @@ const LandingScreen = () => (
                         <Heading size='xl' fontWeight='normal'> Refresh your equipment</Heading>
                     </Stack>
                     <HStack spacing='3'>
-                        <Link as={ReactLink} to='/products' color={mode('cyan.500', 'yellow.200')}>Discover now</Link>
+                        <Link to='/products' color={mode('cyan.500', 'yellow.200')}>Discover now</Link>
                         <Icon color={mode('cyan.500', 'yellow.200')} as={FaArrowRight} />
                     </HStack>
                 </Stack>
