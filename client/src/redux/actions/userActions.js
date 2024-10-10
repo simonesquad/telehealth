@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from 'axios';
 
 import {
     setUserOrders,
@@ -64,3 +64,49 @@ export const register = (name, email, password) => async (dispatch) => {
         );
     }
 };
+
+export const verifyEmail = (token) => async (dispatch) => {
+    dispatch(setLoading(true));
+    try {
+        const config = {headers: { Authorization: `Bearer ${token}`,'Content-Type': 'application/json' } };
+
+        await axios.get('/api/users/verify-email', config);
+
+        dispatch(verificationEmail());
+        const userInfo = JSON.parse(localStorage.getItem('userInfo'))
+        userInfo.active = true;
+        localStorage.setItem('userInfo', JSON.stringify(userInfo));
+    } catch (error) {
+        dispatch(
+            setError(
+                error.response && error.response.data.message
+                ? error.response.data.message
+                : error.message
+                ? error.message
+                : 'An expected error has occured. Please try again later.'
+            )
+        );
+    }
+};
+
+export const sendResetEmail = (email) => async (dispatch) => {
+    dispatch(setLoading(true));
+    try {
+        const config = {headers: { 'Content-Type': 'application/json' } };
+
+        const {data} = await axios.post(`/api/users/password-reset-request`, {email}, config)
+
+        dispatch(setServerResponseMsg(data));
+    } catch (error) {
+        dispatch(
+            setError(
+                error.response && error.response.data.message
+                ? error.response.data.message
+                : error.message
+                ? error.message
+                : 'An expected error has occured. Please try again later.'
+            )
+        );
+    }
+};
+
