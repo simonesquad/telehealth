@@ -36,5 +36,5 @@ export const sendVerificationEmail = (token, email, name, id) => {
             console.log(`Email sent to ${email}`)
             console.log(info.response);
         }
-    })
+    });
 };

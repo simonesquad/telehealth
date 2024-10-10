@@ -56,7 +56,7 @@ const registerUser = asyncHandler(async (req, res) => {
 
     const newToken = genToken(user._id);
 
-    sendVerificationEmail(newToken, email, name, user._id);
+    sendVerificationEmail(newToken, email, name);
 
     if(user) {
         res.status(201).json({
