@@ -110,3 +110,28 @@ export const sendResetEmail = (email) => async (dispatch) => {
     }
 };
 
+export const resetPassword = (password, token) => async (dispatch) => {
+    dispatch(setLoading(true));
+    try {
+        const config = {headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' } };
+
+        const { data, status } = await axios.post(`/api/users/password-reset-request`, { password }, config);
+        dispatch(setServerResponseMsg(data, status))
+        dispatch(setServerResponseStatus(status));
+    } catch (error) {
+        dispatch(
+            setError(
+                error.response && error.response.data.message
+                ? error.response.data.message
+                : error.message
+                ? error.message
+                : 'An expected error has occured. Please try again later.'
+            )
+        );
+    }
+};
+
+export const resetState = () => async (dispatch) => {
+    dispatch(stateReset());
+};
+
