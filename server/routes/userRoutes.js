@@ -114,10 +114,29 @@ const passwordResetRequest = asyncHandler(async(req, res) => {
 })
 
 // password reset
+const password = asyncHandler(async (req, res) => {
+        const token = req.headers.authorization.split(' ')[1]
+        try {
+            const decoded = jwt.verify(token, process.env.TOKEN_SECRET)
+            const user = await User.findById(decoded.id);
+    
+            if(user) {
+                user.password = req.body.password
+                await user.save()
+                res.json('Your password has been updated successfully.');
+            } else {
+                res.status(404).send('User not found.');
+            }
+        } catch (error) {
+            res.status(401).send('Password reset failed.')
+        }
+});
 
 
 userRoutes.route('/login').post(loginUser);
 userRoutes.route('/register').post(registerUser);
 userRoutes.route('/verify-email').get(verifyEmail);
+userRoutes.route('/password-reset-request').post(passwordResetRequest)
+userRoutes.route('/password-reset').post(passwordReset);
 
 export default userRoutes;
