@@ -29,7 +29,7 @@ import { MdOutlineFavorite, MdOutlineFavoriteBorder, MdOutlineAdminPanelSettings
 import { useDispatch, useSelector } from 'react-redux';
 import NavLink from './NavLink';
 import ColorModeToggle from './ColorModeToggle';
-import { BiUserCheck, BiLoginCircle } from 'react-icons/bi';
+import { BiUserCheck, BiLogInCircle } from 'react-icons/bi';
 import { toggleFavorites } from '../redux/actions/productActions';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import { TbShoppingCart } from 'react-icons/tb';
@@ -175,7 +175,7 @@ const Header = () => {
                 </Menu>
             ): (
             <Menu>
-                <MenuButton as={IconButton} variant='ghost' cursor='pointer' icon={<BiLoginCircle size='25px' />} />
+                <MenuButton as={IconButton} variant='ghost' cursor='pointer' icon={<BiLogInCircle size='25px' />} />
                 <MenuList>
                     <Link to='/login'>
                         <MenuItem p='2' fontWeight='400' variant='link'>Sign In</MenuItem>
