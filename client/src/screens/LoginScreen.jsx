@@ -13,18 +13,18 @@ import {
     Text,
     useToast,
     useBreakpointValue,
-
-
 } from '@chakra-ui/react';
 import { Formik } from 'formik';
 import { useEffect, useState } from 'react';
-import { useDispatch, useSelector, useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
-import PasswordField from '../components/PasswordField';
-import PasswordForgottenForm from '../components/PasswordForgottenForm';
+import { useSelector, useDispatch } from 'react-redux';
 import TextField from '../components/TextField';
 import { login } from '../redux/actions/userActions';
+
+// import PasswordField from '../components/PasswordField';
+// import PasswordForgottenForm from '../components/PasswordForgottenForm';
 
 const LoginScreen = () => {
     const navigate = useNavigate();
@@ -44,7 +44,7 @@ const LoginScreen = () => {
             if(location.state?.from) {
                 navigate(location.state.from)
             } else {
-                navigate(redirect)
+                navigate(redirect);
             }
             toast({
                 description: 'Login successful',
