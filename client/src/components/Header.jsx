@@ -7,18 +7,34 @@ import {
     Icon, 
     Stack, 
     Text, 
-    useColorModeValue as mode, useDisclosure } from '@chakra-ui/react';
-import { useEffect } from 'react';
+    useColorModeValue as mode, 
+    useDisclosure,
+    AlertDescription,
+    AlertIcon,
+    AlertTitle,
+    Divider,
+    Image,
+    Menu,
+    MenuButton,
+    MenuDivider,
+    MenuItem,
+    MenuList,
+    Spacer,
+    useToast, 
+} from '@chakra-ui/react';
+import { useEffect, useState } from 'react';
 import { BsPhoneFlip } from 'react-icons/bs';
-import { Link as ReactLink } from 'react-router-dom';
-import { MdOutlineFavorite, MdOutlineFavoriteBorder } from 'react-icons/md';
+import { Link } from 'react-router-dom';
+import { MdOutlineFavorite, MdOutlineFavoriteBorder, MdOutlineAdminPanelSettings } from 'react-icons/md';
 import { useDispatch, useSelector } from 'react-redux';
 import NavLink from './NavLink';
 import ColorModeToggle from './ColorModeToggle';
-import { BiUserCheck } from 'react-icons/bi';
+import { BiUserCheck, BiLoginCircle } from 'react-icons/bi';
 import { toggleFavorites } from '../redux/actions/productActions';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import { TbShoppingCart } from 'react-icons/tb';
+import { logout } from '../redux/actions/userActions';
+
 
 
 const Links = [
@@ -33,6 +49,7 @@ const Header = () => {
     const dispatch = useDispatch()
     const { favoritesToggled } = useSelector((state) => state.product);
     const { cartItems } = useSelector((state) => state.cart);
+    const { userInfo } = useSelector((state) => state.user);
 
     useEffect(() => {}, [favoritesToggled, dispatch]);
 
@@ -48,14 +65,15 @@ const Header = () => {
                         icon={isOpen ? <CloseIcon /> : <HamburgerIcon />} 
                         onClick={isOpen ? onClose : onOpen}
                     />
-                    <IconButton 
-                        ml='12' 
-                        position='absolute' 
-                        icon={<TbShoppingCart size='20px' />}
-                        as={ReactLink}
-                        to='/cart'
-                        variant='ghost'
-                    />
+                    <Link to='/cart'>
+                        <IconButton 
+                            ml='12' 
+                            position='absolute' 
+                            icon={<TbShoppingCart size='20px' />}
+                            to='/cart'
+                            variant='ghost'
+                        />
+                    </Link>
                     {cartItems.length > 0 && (
                         <Text 
                             fontWeight='bold' fontStyle='italic' position='absolute'
@@ -66,10 +84,14 @@ const Header = () => {
                     )}
                 </Flex>
                 <HStack spacing='8' alignItems='center'>
-                    <Box alignItems='center' display='flex' as={ReactLink} to='/'>
-                        <Icon as={BsPhoneFlip} h='6' w='6' color={mode('black', 'yellow.200')} />
-                        <Text as ='b'>Telehealth</Text>
-                    </Box>
+                    <Link to='/'>
+                        <Box 
+                            alignItems='center' display='flex' 
+                            >
+                            <Icon as={BsPhoneFlip} h='6' w='6' color={mode('black', 'yellow.200')} />
+                            <Text as ='b'>Telehealth</Text>
+                        </Box>
+                    </Link>
 
                     <HStack as='nav' spacing='4' display={{ base: 'none', md: 'flex' }}>
                         {Links.map((link) => (
@@ -77,14 +99,14 @@ const Header = () => {
                         ))}
 
                         <Box>
-                            <IconButton 
-                                ml='12' 
-                                position='absolute' 
-                                icon={<TbShoppingCart size='20px' />}
-                                as={ReactLink}
-                                to='/cart'
-                                variant='ghost'
-                            />
+                            <Link to='/cart'>
+                                <IconButton 
+                                    ml='12' 
+                                    position='absolute' 
+                                    icon={<TbShoppingCart size='20px' />}
+                                    variant='ghost'
+                                />
+                            </Link>
                             {cartItems.length > 0 && (
                             <Text 
                                 fontWeight='bold' fontStyle='italic' position='absolute'
@@ -113,7 +135,59 @@ const Header = () => {
         )}
             </HStack>
         </HStack>
-        <Flex alignItems='center'><BiUserCheck /></Flex>
+        <Flex alignItems='center'>
+            {userInfo ? (
+                <Menu>
+                    <MenuButton rounded='full' variant='link' cursor='pointer' minW='0'>
+                        <HStack>
+                            <BiUserCheck size='30' />
+                            {/* <ChevronDownIcon /> */}
+                        </HStack>
+                    </MenuButton>
+                    <MenuList>
+                        <HStack>
+                            <Text pl='3' as='i'>{userInfo.email}</Text>
+                        </HStack>
+                        <Divider py='1' />
+                        <Link to='/order-history'>
+                            <MenuItem>
+                            Order History
+                            </MenuItem>
+                            {userInfo.isAdmin && (
+                                <>
+                                <MenuDivider />
+                                <Link to='/admin-console'>
+                                <MenuItem>
+                                    Admin Console
+                                </MenuItem>
+                        </Link>
+                                </>
+                            )}
+                            <MenuDivider />
+                            <MenuItem onClick={logoutHandler}>Logout</MenuItem>
+                        </Link>
+                        <Link to='/profile'>
+                            <MenuItem>
+                            Profile
+                            </MenuItem>
+                        </Link>
+                    </MenuList>
+                </Menu>
+            ): (
+            <Menu>
+                <MenuButton as={IconButton} variant='ghost' cursor='pointer' icon={<BiLoginCircle size='25px' />} />
+                <MenuList>
+                    <Link to='/login'>
+                        <MenuItem p='2' fontWeight='400' variant='link'>Sign In</MenuItem>
+                    </Link>
+                    <MenuDivider />
+                    <Link to='/registration'>
+                        <MenuItem p='2' fontWeight='400' variant='link'>Sign Up</MenuItem>
+                    </Link>
+                </MenuList>
+            </Menu>
+            )}
+        </Flex>
     </Flex>
     <Box display='flex'>
                     {isOpen && (
