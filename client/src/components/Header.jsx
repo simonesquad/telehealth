@@ -50,8 +50,18 @@ const Header = () => {
     const { favoritesToggled } = useSelector((state) => state.product);
     const { cartItems } = useSelector((state) => state.cart);
     const { userInfo } = useSelector((state) => state.user);
+    const toast = useToast();
 
     useEffect(() => {}, [favoritesToggled, dispatch]);
+
+    const logoutHandler = () => {
+        dispatch(logout());
+        toast({
+            description: 'You have been logged out.',
+            status: 'success',
+            isClosable: 'true',
+        });
+    };
 
     return (
         
