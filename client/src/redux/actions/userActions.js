@@ -6,6 +6,7 @@ import {
   userLogin,
   userLogout,
   updateUserProfile,
+  sendResetEmail,
   resetUpdate,
   setUserOrders,
 } from '../slices/user';
@@ -91,6 +92,31 @@ export const updateProfile = (id, name, email, password) => async (dispatch, get
       )
     );
   }
+};
+
+export const sendResetEmailHere = (email) => async(dispatch) => {
+  dispatch(setLoading(true));
+try {
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+
+  const { data } = await axios.post('/api/users/password-reset-request', { email }, config);
+  dispatch(sendResetEmail(data));
+  localStorage.setItem('userInfo', JSON.stringify(data));
+} catch (error) {
+  dispatch(
+    setError(
+      error.response && error.response.data
+        ? error.response.data
+        : error.message
+        ? error.message
+        : 'An unexpected error has occured. Please verify that the email you entered is associated with this account.'
+    )
+  );
+}
 };
 
 export const resetUpdateSuccess = () => async (dispatch) => {

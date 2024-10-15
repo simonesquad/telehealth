@@ -24,7 +24,7 @@ import TextField from '../components/TextField';
 import { login } from '../redux/actions/userActions';
 
 // import PasswordField from '../components/PasswordField';
-// import PasswordForgottenForm from '../components/PasswordForgottenForm';
+import PasswordForgottenForm from '../components/PasswordForgottenForm';
 
 const LoginScreen = () => {
     const navigate = useNavigate();
@@ -38,6 +38,10 @@ const LoginScreen = () => {
 
     const headingBR = useBreakpointValue({ base: 'xs', md: 'sm' });
     const boxBR = useBreakpointValue({ base: 'transparent', md: 'bg-surface' });
+
+    const passwordReset = () => {
+        setShowPasswordReset(!showPasswordReset);
+    };
 
     useEffect(() => {
         if(userInfo) {
@@ -115,6 +119,11 @@ const LoginScreen = () => {
                         <TextField type='password' name='password' placeholder='your password' label='Password' />
                       </FormControl>
                     </Stack>
+                    <Button onClick={passwordReset}>
+                        {showPasswordReset ? 'Close' : 'Forgot Password?'}</Button>
+                        {showPasswordReset && <div>
+                            <PasswordForgottenForm />
+                            </div>}
                     <Stack spacing='6'>
                       <Button colorScheme='orange' size='lg' fontSize='md' isLoading={loading} type='submit'>
                         Sign in

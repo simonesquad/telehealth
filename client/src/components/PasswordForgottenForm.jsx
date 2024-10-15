@@ -1,7 +1,7 @@
 import { Text, Stack, Box, Button, Input} from '@chakra-ui/react';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { sendResetEmail } from '../redux/actions/userActions';
+import { sendResetEmailHere } from '../redux/actions/userActions';
 
 const PasswordForgottenForm = () => {
     const dispatch = useDispatch();
@@ -25,7 +25,7 @@ const PasswordForgottenForm = () => {
                 value={email}
                 onChange={(e) => handleChange(e)}
             />
-            <Button colorScheme='yellow' size='lg' fontSize='md' onClick={() => dispatch(sendResetEmail(email))}>Send Reset Email</Button>
+            <Button colorScheme='yellow' size='lg' fontSize='md' onClick={() => dispatch(sendResetEmailHere(email))}>Send Reset Email</Button>
         </Stack>
     </>
   )

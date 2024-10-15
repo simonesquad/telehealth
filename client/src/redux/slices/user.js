@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { sendResetEmail } from '../actions/userActions';
 
 export const initialState = {
   loading: false,
@@ -34,6 +35,11 @@ export const userSlice = createSlice({
       state.updateSuccess = true;
       state.loading = false;
       state.error = null;
+    },
+    sendResetEmail: (state, { payload }) => {
+      state.userInfo = payload;
+      state.error = null;
+      state.loading = false;
     },
     resetUpdate: (state) => {
       state.updateSuccess = false;
