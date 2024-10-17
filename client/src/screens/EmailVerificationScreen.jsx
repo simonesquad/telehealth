@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
-import { verifyEmail } from '../redux/actions/userActions'
+import { verificationEmail } from '../redux/slices/user'
 import { useDispatch, useSelector } from 'react-redux'
 import { 
     AbsoluteCenter, 
@@ -20,7 +20,7 @@ const EmailVerificationScreen = () => {
     const { error, loading } = useSelector((state) => state.user);
 
     useEffect(() => {
-        dispatch(verifyEmail(token));
+        dispatch(verificationEmail(token));
     }, [token, dispatch]);
 
   return (

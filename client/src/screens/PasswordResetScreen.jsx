@@ -22,7 +22,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import * as Yup from 'yup';
 import PasswordField from '../components/PasswordField';
-import { resetPassword, resetState } from '../redux/actions/userActions';
+import { resetUpdate, stateReset } from '../redux/slices/user.js';
 
 const PasswordResetScreen = () => {
     const { token } = useParams();
@@ -46,7 +46,7 @@ const PasswordResetScreen = () => {
                 status: 'success',
                 isClosable: true
             });
-            dispatch(resetState());
+            dispatch(stateReset());
         }
     }, [error, toast, serverMsg, serverStatus, dispatch]);
 
@@ -73,7 +73,7 @@ const PasswordResetScreen = () => {
         .oneOf([Yup.ref('password'), null], 'Passwords must match'),
     })}
     onSubmit={(values) => {
-      dispatch(resetPassword(values.password, token));
+      dispatch(resetUpdate(values.password, token));
     }}>
     {(formik) => (
         <Container maxW='lg' py={{ base: '12', md: '24 ' }} px={{ base: '0', md: '8' }} minH='4xl'>
@@ -98,6 +98,16 @@ const PasswordResetScreen = () => {
                                         <AlertDescription>{error}</AlertDescription>
                                     </Alert>
                             )}
+                            <Stack spacing='5'>
+                                <FormControl>
+                                    <PasswordField type='password' name='password' placeholder='your-password' label='New Password' />
+
+                                    <PasswordField type='password' name='confirmPassword' placeholder='Confirm your new password' label='Confirm your password' />
+                                </FormControl>
+                            </Stack>
+                            <Stack spacing='6'>
+                                <Button colorScheme='cyan' size='lg' fontSize='md' isLoading={loading} type='submit'>Set new password</Button>
+                            </Stack>
                         </Stack>
                     </Box>
             </Stack>

@@ -3,7 +3,7 @@ import User from '../models/User.js';
 import expressAsyncHandler from 'express-async-handler';
 import jwt from 'jsonwebtoken';
 import { sendVerificationEmail } from '../middleware/sendVerificationEmail.js';
-
+import { sendPassswordResetEmail } from '../middleware/sendPasswordResetEmail.js';
 
 
 const userRoutes = express.Router()
