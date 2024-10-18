@@ -1,5 +1,4 @@
 import { 
-
     Alert,
     AlertDescription,
     AlertIcon,
@@ -22,7 +21,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import * as Yup from 'yup';
 import PasswordField from '../components/PasswordField';
-import { resetUpdate, stateReset } from '../redux/slices/user.js';
+import { resetPassword } from '../redux/actions/userActions';
+import { stateReset } from '../redux/slices/user';
 
 const PasswordResetScreen = () => {
     const { token } = useParams();
@@ -73,7 +73,7 @@ const PasswordResetScreen = () => {
         .oneOf([Yup.ref('password'), null], 'Passwords must match'),
     })}
     onSubmit={(values) => {
-      dispatch(resetUpdate(values.password, token));
+      dispatch(resetPassword(values.password, token));
     }}>
     {(formik) => (
         <Container maxW='lg' py={{ base: '12', md: '24 ' }} px={{ base: '0', md: '8' }} minH='4xl'>

@@ -69,34 +69,6 @@ export const register = (name, email, password) => async (dispatch) => {
   }
 };
 
-export const updateProfile = (id, name, email, password) => async (dispatch, getState) => {
-  const {
-    user: { userInfo },
-  } = getState();
-
-  try {
-    const config = {
-      headers: {
-        Authorization: `Bearer ${userInfo.token}`,
-        'Content-Type': 'application/json',
-      },
-    };
-    const { data } = await axios.put(`/api/users/profile/${id}`, { _id: id, name, email, password }, config);
-    localStorage.setItem('userInfo', JSON.stringify(data));
-    dispatch(updateUserProfile(data));
-  } catch (error) {
-    dispatch(
-      setError(
-        error.response && error.response.data
-          ? error.response.data
-          : error.message
-          ? error.message
-          : 'An unexpected error has occured. Please try again later.'
-      )
-    );
-  }
-};
-
 export const sendResetEmail = (email) => async(dispatch) => {
   dispatch(setLoading(true));
 try {
@@ -121,10 +93,6 @@ try {
       )
     );
   }
-};
-
-export const resetUpdateSuccess = () => async (dispatch) => {
-  dispatch(resetUpdate());
 };
 
 export const getUserOrders = () => async (dispatch, getState) => {
