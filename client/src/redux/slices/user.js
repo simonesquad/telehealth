@@ -1,20 +1,36 @@
 import { createSlice } from '@reduxjs/toolkit';
-// import { sendResetEmail } from '../actions/userActions';
 
 export const initialState = {
   loading: false,
   error: null,
   userInfo: JSON.parse(localStorage.getItem('userInfo')) ?? null,
-  updateSuccess: false,
-  orders: [],
+  serverMsg: null,
+  serverStatus: null,
 };
 
 export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
+    setUserOrders: (state, { payload }) => {
+      state.error = null;
+      state.orders = payload;
+      state.loading = false;
+    },
+    setError: (state, { payload }) => {
+      state.error = payload;
+      state.loading = false;
+    },
     setLoading: (state) => {
       state.loading = true;
+    },
+    setServerResponseStatus: (state, { payload }) => {
+      state.serverStatus = payload;
+      state.loading = false;
+    },
+    setServerResponseMsg: (state, { payload }) => {
+      state.serverMsg = payload;
+      state.loading = false;
     },
     userLogin: (state, { payload }) => {
       state.userInfo = payload;
@@ -26,52 +42,31 @@ export const userSlice = createSlice({
       state.error = null;
       state.userInfo = null;
     },
-    setError: (state, { payload }) => {
-      state.error = payload;
-      state.loading = false;
-    },
     verificationEmail: (state) => {
       state.userInfo && (state.userInfo.active = true);
       state.loading = false;
       state.error = null;
     },
-    setServerResponseMsg: (state, { payload }) => {
-      state.serverMsg = payload;
-      state.loading = false;
-    },
-    setServerResponseStatus: (state, { payload }) => {
-      state.serverStatus = payload;
-      state.loading = false;
-    },
     stateReset: (state) => {
       state.loading = false;
       state.serverMsg = null;
       state.error = null;
-    },
-    updateUserProfile: (state, { payload }) => {
-      state.userInfo = payload;
-      state.updateSuccess = true;
-      state.loading = false;
-      state.error = null;
-    },
-    sendResetEmail: (state, { payload }) => {
-      state.userInfo = payload;
-      state.error = null;
-      state.loading = false;
-    },
-    resetUpdate: (state) => {
-      state.updateSuccess = false;
-    },
-    setUserOrders: (state, { payload }) => {
-      state.error = null;
-      state.orders = payload;
-      state.loading = false;
-    },
+    },   
   },
 });
 
-export const { setLoading, setError, userLogin, userLogout, updateUserProfile, resetUpdate, setUserOrders, verificationEmail, setServerResponseMsg, setServerResponseStatus, stateReset, sendResetEmail } =
-  userSlice.actions;
+export const { 
+  setUserOrders,
+  setError, 
+  setLoading, 
+  setServerResponseStatus, 
+  setServerResponseMsg,
+  userLogin, 
+  userLogout, 
+  verificationEmail, 
+  stateReset,
+} = userSlice.actions;
+
 export default userSlice.reducer;
 
 export const userSelector = (state) => state.user;
