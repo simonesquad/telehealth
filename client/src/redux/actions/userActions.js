@@ -97,7 +97,7 @@ export const updateProfile = (id, name, email, password) => async (dispatch, get
   }
 };
 
-export const sendResetEmailHere = (email) => async(dispatch) => {
+export const sendResetEmail = (email) => async(dispatch) => {
   dispatch(setLoading(true));
 try {
   const config = {
@@ -106,9 +106,10 @@ try {
     },
   };
 
-  const { data } = await axios.post('/api/users/password-reset-request', { email }, config);
-  dispatch(sendResetEmail(data));
-  localStorage.setItem('userInfo', JSON.stringify(data));
+  const { data, status } = await axios.post('/api/users/password-reset-request', { email }, config);
+
+  dispatch(setServerResponseMsg(data));
+  dispatch(setServerResponseStatus(status));
 } catch (error) {
   dispatch(
     setError(
@@ -116,10 +117,10 @@ try {
         ? error.response.data
         : error.message
         ? error.message
-        : 'An unexpected error has occured. Please verify that the email you entered is associated with this account.'
-    )
-  );
-}
+        : 'An unexpected error has occured. Please try later.'
+      )
+    );
+  }
 };
 
 export const resetUpdateSuccess = () => async (dispatch) => {
