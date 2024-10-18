@@ -42,7 +42,7 @@ const EmailVerificationScreen = () => {
 
                             <AlertIcon boxSize='16' size='xl'/>
                             <AlertTitle>Thanks for verifying your email.</AlertTitle>
-                            <AlertDescription fontSize='xl'>You can continue shopping now!</AlertDescription>
+                            <AlertDescription fontSize='xl'>You can close this window now.</AlertDescription>
                     </Alert>
                 ) : (
                     <Alert  
@@ -57,13 +57,6 @@ const EmailVerificationScreen = () => {
                             <AlertTitle>We are sorry!</AlertTitle>
                             <AlertDescription fontSize='xl'>You can continue shopping now!</AlertDescription>
                     </Alert>
-                )}
-                {!loading && (
-                    <Link to='/login'>
-                    <Button colorScheme='cyan' p='2' size='lg' minW='300px'>
-                        Sign back in
-                    </Button>
-                    </Link>
                 )}
             </AbsoluteCenter>
         </Box>

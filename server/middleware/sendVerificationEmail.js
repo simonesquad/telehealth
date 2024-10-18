@@ -2,7 +2,7 @@ import nodemailer from 'nodemailer';
 // uvri jtyd lijc osvm
 //sworldorigins@gmail.com
 
-export const sendVerificationEmail = (token, email, name, id) => {
+export const sendVerificationEmail = (token, email, name) => {
     const html = `
         <html>
             <body>

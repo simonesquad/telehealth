@@ -9,6 +9,7 @@ import {
     Text, 
     useColorModeValue as mode, 
     useDisclosure,
+    Alert,
     AlertDescription,
     AlertIcon,
     AlertTitle,
@@ -51,8 +52,13 @@ const Header = () => {
     const { cartItems } = useSelector((state) => state.cart);
     const { userInfo } = useSelector((state) => state.user);
     const toast = useToast();
+    const [showBanner, setShowBanner] = useState(userInfo ? !userInfo.active : false);
 
-    useEffect(() => {}, [favoritesToggled, dispatch]);
+    useEffect(() => {
+        if (userInfo && !userInfo.active) {
+            setShowBanner(true);
+        }
+    }, [favoritesToggled, dispatch, userInfo]);
 
     const logoutHandler = () => {
         dispatch(logout());
@@ -64,7 +70,7 @@ const Header = () => {
     };
 
     return (
-        
+        <>
         <Box bg={mode(`cyan.300`, 'gray.900')} px='4'>
 
             <Flex h='16' alignItems='center' justifyContent='space-between'>
@@ -224,6 +230,18 @@ const Header = () => {
                     )}
                 </Box>
             </Box>
+            {userInfo && !userInfo.active && showBanner && (
+                <Box>
+                    <Alert status='warning'>
+                        <AlertIcon />
+                        <AlertTitle>Email not verified!</AlertTitle>
+                        <AlertDescription>You must verify your email address.</AlertDescription>
+                        <Spacer />
+                        <CloseIcon cursor={'pointer'} onClick={() => setShowBanner(false)} />
+                    </Alert>
+                </Box>
+            )}
+        </>
         );
     };
 

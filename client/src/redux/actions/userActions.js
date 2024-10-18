@@ -1,15 +1,17 @@
-
 import axios from 'axios';
 import {
-  setLoading,
+  setUserOrders,
   setError,
+  setLoading,
+  setServerResponseStatus,
+  setServerResponseMsg,
   userLogin,
   userLogout,
-  updateUserProfile,
-  sendResetEmail,
-  resetUpdate,
-  setUserOrders,
+  verificationEmail,
+  stateReset,
 } from '../slices/user';
+
+import { clearCart } from '../slices/cart';
 
 export const login = (email, password) => async (dispatch) => {
   dispatch(setLoading(true));
@@ -21,6 +23,7 @@ export const login = (email, password) => async (dispatch) => {
     };
 
     const { data } = await axios.post('/api/users/login', { email, password }, config);
+
     dispatch(userLogin(data));
     localStorage.setItem('userInfo', JSON.stringify(data));
   } catch (error) {
@@ -146,6 +149,28 @@ export const getUserOrders = () => async (dispatch, getState) => {
           : error.message
           ? error.message
           : 'An unexpected error has occured. Please try again later.'
+      )
+    );
+  }
+};
+
+export const resetPassword = (password, token) => async (dispatch) => {
+  dispatch(setLoading(true));
+  try {
+    const config = { headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' } };
+
+    const { data, status } = await axios.post(`/api/users/password-reset`, { password }, config);
+    console.log(data, status);
+    dispatch(setServerResponseMsg(data, status));
+    dispatch(setServerResponseStatus(status));
+  } catch (error) {
+    dispatch(
+      setError(
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
+          ? error.message
+          : 'An expected error has occured. Please try again later.'
       )
     );
   }
