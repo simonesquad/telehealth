@@ -11,9 +11,29 @@ import LoginScreen from './screens/LoginScreen';
 import RegistrationScreen from './screens/RegistrationScreen';
 import EmailVerificationScreen from './screens/EmailVerificationScreen';
 import PasswordResetScreen from './screens/PasswordResetScreen';
+import axios from 'axios';
+import { VStack, Spinner } from '@chakra-ui/react'
+import { useState, useEffect } from 'react';
+import { GoogleAuthProvider } from '@react-oauth/google';
+
+
 
 function App() {
-  return (
+  const [ googleClient, setGoogleClient ] = useState(null);
+  useEffect(() => {
+    const googleKey = async () => {
+      const { data: googleId } = await axios.get('/api/config/google');
+      setGoogleClient(googleId);
+    };
+    googleKey();
+  }, [googleClient]);
+
+  return !googleClient ? (
+  <VStack pt='37vh'>
+    <Spinner mt='20' thickness='2px' speed='0.65s' emptyColor='gray.200' color='cyan.500' size='xl' />
+  </VStack>
+    ):(
+      <GoogleAuthProvider cliientId={googleClient}>
       <ChakraProvider>
           <Router>
               <Header />
@@ -32,6 +52,7 @@ function App() {
               <Footer />
           </Router>
       </ChakraProvider>
+    </GoogleAuthProvider>
     );
 }
 
