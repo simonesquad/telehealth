@@ -132,6 +132,31 @@ const password = asyncHandler(async (req, res) => {
         }
 });
 
+// google login 
+const googlelogin = asyncHandler(async(req, res) => {
+    const { googleId, email, name, googleImage } = req.body;
+
+    try {
+        const user = await User.findOne({ googleid: googleId });
+        if(user) {
+            user.firstLogin = false;
+            await user.save()
+            res.json({
+                _id: user._id,
+                name: user.name,
+                email: user.email,
+                googleImage: user.googleImage,
+                googleId: user.googleId,
+                firstLogin: user.firstLogin,
+                isAdmin: user.isAdmin,
+                token: genToken(user._id),
+                active: user.active,
+                createdAt: user.createdAt,
+            });
+        }
+    } catch (error) {}
+});
+
 
 userRoutes.route('/login').post(loginUser);
 userRoutes.route('/register').post(registerUser);

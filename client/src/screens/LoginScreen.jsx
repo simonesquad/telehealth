@@ -33,7 +33,7 @@ const LoginScreen = () => {
     const toast = useToast();
     const dispatch = useDispatch();
 
-    const { loading, error, userInfo, message } = useSelector((state) => state.user);
+    const { loading, error, userInfo, serverMsg } = useSelector((state) => state.user);
     const [ showPasswordReset, setShowPasswordReset ] = useState(false);
 
     const headingBR = useBreakpointValue({ base: 'xs', md: 'sm' });
@@ -57,15 +57,15 @@ const LoginScreen = () => {
             });
         }
 
-        if (message) {
+        if (serverMsg) {
         
             toast ({
-                description: `${message}`,
+                description: `${serverMsg}`,
                 status: 'success',
                 isClosable: true,
             });
         }
-    }, [userInfo, redirect, error, navigate, location.state, toast, showPasswordReset, message]);
+    }, [userInfo, redirect, error, navigate, location.state, toast, showPasswordReset, serverMsg]);
 
     return (
         <Formik
