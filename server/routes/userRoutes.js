@@ -153,8 +153,33 @@ const googlelogin = asyncHandler(async(req, res) => {
                 active: user.active,
                 createdAt: user.createdAt,
             });
+        } else {
+            const newUser = await User.create({
+                name, 
+                email, 
+                googleImage, 
+                googleId,
+            });
+
+            const newToken = genToken(newUser._id);
+
+            sendVerificationEmail(newToken, newUser.email, newUser.name, newUser._id);
+                res.json({
+                    _id: newUser._id,
+                    name: newUser.name,
+                    email: newUser.email,
+                    googleImage: newUser.googleImage,
+                    googleId: newUser.googleId,
+                    firstLogin: newUser.firstLogin,
+                    isAdmin: newUser.isAdmin,
+                    token: genToken(newUser._id),
+                    active: newUser.active,
+                    createdAt: newUser.createdAt,
+                });
         }
-    } catch (error) {}
+    } catch (error) {
+        res.status(404).send('Something went wrong, please try again later.');
+    }
 });
 
 
@@ -163,5 +188,6 @@ userRoutes.route('/register').post(registerUser);
 userRoutes.route('/verify-email').get(verifyEmail);
 userRoutes.route('/password-reset-request').post(passwordResetRequest)
 userRoutes.route('/password-reset').post(passwordReset);
+userRoutes.route('/google-login').post(googleLogin);
 
 export default userRoutes;
