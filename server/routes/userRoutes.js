@@ -14,7 +14,7 @@ const genToken = (id) => {
 }
 
 // login
-const loginUser = asyncHandler(async (req, res) => {
+const loginUser = expressAsyncHandler(async (req, res) => {
     const {email, password} = req.body
     const user = await User.findOne({ email });
 
@@ -40,7 +40,7 @@ const loginUser = asyncHandler(async (req, res) => {
 })
 
 // register
-const registerUser = asyncHandler(async (req, res) => {
+const registerUser = expressAsyncHandler(async (req, res) => {
     const {name, email, password} = req.body
 
     const userExists = await User.findOne({email});
@@ -78,7 +78,7 @@ const registerUser = asyncHandler(async (req, res) => {
 });
 
 // verify Email
-const verifyEmail = asyncHandler( async (req, res) => {
+const verifyEmail = expressAsyncHandler( async (req, res) => {
     const token = req.headers.authorization.split(' ')[1]
     try {
         const decoded = jwt.verify(token, process.env.TOKEN_SECRET)
@@ -97,7 +97,7 @@ const verifyEmail = asyncHandler( async (req, res) => {
 })
 
 // password reset request
-const passwordResetRequest = asyncHandler(async(req, res) => {
+const passwordResetRequest = expressAsyncHandler(async(req, res) => {
     const { email } = req.body;
 
     try {
@@ -114,7 +114,7 @@ const passwordResetRequest = asyncHandler(async(req, res) => {
 })
 
 // password reset
-const password = asyncHandler(async (req, res) => {
+const passwordReset = expressAsyncHandler(async (req, res) => {
         const token = req.headers.authorization.split(' ')[1]
         try {
             const decoded = jwt.verify(token, process.env.TOKEN_SECRET)
@@ -133,7 +133,7 @@ const password = asyncHandler(async (req, res) => {
 });
 
 // google login 
-const googlelogin = asyncHandler(async(req, res) => {
+const googleLogin = expressAsyncHandler(async(req, res) => {
     const { googleId, email, name, googleImage } = req.body;
 
     try {

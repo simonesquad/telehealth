@@ -23,7 +23,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import TextField from '../components/TextField';
 import { login, googleLogin } from '../redux/actions/userActions';
 import { useGoogleLogin } from '@react-oauth/google';
-import { FcGoogle } from 'react-icons/fa';
+import { FcGoogle } from 'react-icons/fc';
 import axios from 'axios';
 
 // import PasswordField from '../components/PasswordField';
@@ -143,6 +143,7 @@ const LoginScreen = () => {
                         Sign in
                       </Button>
                       <Button 
+                        leftIcon={<FcGoogle />}
                         colorScheme='cyan' 
                         size='lg' 
                         fontSize='md' 

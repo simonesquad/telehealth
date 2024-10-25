@@ -1,11 +1,11 @@
 import mongoose from "mongoose";
-import bcrypt from 'bcryptsjs';
+import bcrypt from 'bcryptjs';
 
 const userSchema = new mongoose.Schema({
         name: { type: String, required: true },
         email: { type: String, required: true, unique: true },
         password: { type: String },
-        active: { type: boolean, default: false },
+        active: { type: Boolean, default: false },
         isAdmin: { type: String, default: false },
         firstLogin: { type: Boolean, default: true },
         googleImage: { type: String, default: undefined },

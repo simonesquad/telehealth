@@ -19,10 +19,10 @@ const getProducts = async (req, res) => {
         res.json({ products, pagination: {} });
     }
 
-    // res.json({
-    //     products,
-    //     pagination: {},
-    // });
+    res.json({
+        products,
+        pagination: {},
+    });
 };
 
 const getProduct = async (req, res) => {
