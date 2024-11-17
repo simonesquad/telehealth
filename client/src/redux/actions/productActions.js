@@ -78,7 +78,7 @@ export const getProduct = (id) => async (dispatch) => {
 export const createProductReview = (productId, userId, comment, rating, title) => async (dispatch, getState) => {
     const {
         user: {userInfo}
-    } = getState()
+    } = getState();
     try {
         const config = { headers: { Authorization: `Bearer ${userInfo.token}`, 'Content-Type': 'application/json' } };
 
@@ -96,3 +96,5 @@ export const createProductReview = (productId, userId, comment, rating, title) =
         );
     }
 }
+
+
