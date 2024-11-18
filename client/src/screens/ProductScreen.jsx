@@ -192,7 +192,7 @@ const ProductScreen = () => {
                 <Button 
                   isDisabled={hasUserReviewed()} 
                   my='20px' 
-                  w='14px' 
+                  w='140px' 
                   colorScheme='cyan' 
                   onClick={() => setReviewBoxOpen(!reviewBoxOpen)}>
                     Write a Review
@@ -206,16 +206,16 @@ const ProductScreen = () => {
                         <Star />
                       </Button>
                       <Button variant='outline' onClick={() => setRating(2)}>
-                        <Star />
+                        <Star rating={rating} star={2} />
                       </Button>
                       <Button variant='outline' onClick={() => setRating(3)}>
-                        <Star />
+                        <Star rating={rating} star={3} />
                       </Button>
                       <Button variant='outline' onClick={() => setRating(4)}>
-                        <Star />
+                        <Star rating={rating} star={4} />
                       </Button>
                       <Button variant='outline' onClick={() => setRating(5)}>
-                        <Star />
+                        <Star rating={rating} star={5} />
                       </Button>
                     </HStack>
                   </Wrap>
