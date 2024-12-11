@@ -71,8 +71,8 @@ export default cartSlice.reducer;
 
 export const cartSelector = (state) => state.cart;
 
-//HELLO THIS IS A TEST**
+// HELLO THIS IS A TEST**
 // TEST 2
 // FINE GRAINED TOKEN, etc.
 // FINE GRAINED WITH PERMISSIONS 
-// COARSE GRAINED With Admin
+// CLASSIC- With Admin
