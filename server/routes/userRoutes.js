@@ -5,8 +5,9 @@ import jwt from 'jsonwebtoken';
 import { sendVerificationEmail } from '../middleware/sendVerificationEmail.js';
 import { sendPassswordResetEmail } from '../middleware/sendPasswordResetEmail.js';
 import { protectRoute } from '../middleware/authMiddleware.js';
+import Order from '../models/Order.js';
 
-const userRoutes = express.Router()
+const userRoutes = express.Router();
 
 //TODO: redefine expriesIn
 const genToken = (id) => {
@@ -171,6 +172,16 @@ const googleLogin = expressAsyncHandler(async(req, res) => {
     }
 });
 
+const getUserOrders = asyncHandler(async (req, res) => {
+    const orders = await Order.find({ user: req.params.id });
+    if(orders) {
+        res.json(orders);
+    } else {
+        res.sstatus(404);
+        throw new Error('No orders found.');
+    }
+});
+
 
 userRoutes.route('/login').post(loginUser);
 userRoutes.route('/register').post(registerUser);
@@ -178,5 +189,6 @@ userRoutes.route('/verify-email').get(protectRoute, verifyEmail);
 userRoutes.route('/password-reset-request').post(passwordResetRequest)
 userRoutes.route('/password-reset').post(passwordReset);
 userRoutes.route('/google-login').post(googleLogin);
+userRoutes.route('/:id').get(protectRoute, getUserOrders);
 
 export default userRoutes;
