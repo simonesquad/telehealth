@@ -11,7 +11,7 @@ import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 // import cart, { cartSelector } from '../redux/slices/cart';
 
-const OrderSummary = () => {
+const OrderSummary = ({ checkoutScreen = false }) => {
 
   const { subtotal, shipping } = useSelector((state) => state.cart);
 
@@ -47,6 +47,7 @@ const OrderSummary = () => {
 
         <Link to='/checkout'>
           <Button 
+            hidden={checkoutScreen}
             colorScheme='cyan' 
             size='lg' 
             rightIcon={<FaArrowRight />}
