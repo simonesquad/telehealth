@@ -161,7 +161,8 @@ export const googleLogin = (googleId, email, name, googleImage) => async (dispat
             : error.message
             ? error.message
             : 'An expected error has occured. Please try again later.'
-        )
-      );
-    }
+      )
+    );
+  }
 };
+
