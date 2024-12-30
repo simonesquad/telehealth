@@ -18,6 +18,7 @@ import { GoogleOAuthProvider } from '@react-oauth/google';
 import CheckoutScreen from './screens/CheckoutScreen';
 import YourOrdersScreen from './screens/YourOrdersScreen';
 import CancelScreen from './screens/CancelScreen';
+import SuccessScreen from './screens/SuccessScreen';
 
 
 

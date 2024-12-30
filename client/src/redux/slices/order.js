@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { setShippiing } from '../actions/cartActions';
+import { setShipping } from '../actions/cartActions';
 import { setShippingCosts } from './cart';
 
 export const initialState = { 

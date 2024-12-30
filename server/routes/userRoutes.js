@@ -172,7 +172,7 @@ const googleLogin = expressAsyncHandler(async(req, res) => {
     }
 });
 
-const getUserOrders = asyncHandler(async (req, res) => {
+const getUserOrders = expressAsyncHandler(async (req, res) => {
     const orders = await Order.find({ user: req.params.id });
     if(orders) {
         res.json(orders);

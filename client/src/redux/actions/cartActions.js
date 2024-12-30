@@ -35,7 +35,7 @@ export const removeCartItem = (id) =>  async (dispatch) => {
     dispatch(cartItemRemoval(id))
 }
 
-export const setShippiing = (value) => async (dispatch) => {
+export const setShipping = (value) => async (dispatch) => {
     dispatch(setShippingCosts(value));
 };
 

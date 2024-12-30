@@ -41,7 +41,7 @@ const ShippingInformation = () => {
 
             }} validationSchema={Yup.object({
                 address: Yup.string().required('We need an address.').min(2, 'This address is too short.'),
-                postalCode: Yup.striing().required('We need a postal code.').min(2, 'This postal code is too short.'),
+                postalCode: Yup.string().required('We need a postal code.').min(2, 'This postal code is too short.'),
                 city: Yup.string().required('We need a country.').min(2, 'This country is too short.'),
                 country: Yup.string().required('We need a country.').min(2, 'This country is too short.'),
             })}

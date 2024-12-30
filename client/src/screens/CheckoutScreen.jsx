@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { Navigate, useLocation } from 'react-router-dom';
 import OrderSummary from '../components/OrderSummary';
 import ShippingInformation from '../components/ShippingInformation';
+import Order from '../redux/slices/order';
 
 const CheckoutScreen = () => {
     const { userInfo } = useSelector((state) => state.user);
@@ -16,16 +17,20 @@ const CheckoutScreen = () => {
         px={{ base: '4', md: '8', lg: '12' }}
         py={{ base: '6', md: '8', lg: '12' }}>
             <Stack spacing='8' direction={{ base: 'column', lg: 'row' }} align={{ base: 'revert', lg: 'flex-start' }}>
+                <Stack spacing={{ base: '8', md: '18' }} flex='1.5' mb={{ base: '12', md: 'none' }}>
                 <Heading fontSize={{ base: '8', md: '10' }} flex='1.5' mb={{ base: '12', md: 'none' }}>
                     Shipping Information
                 </Heading>
                 <Stack>
                     <ShippingInformation />
                 </Stack>
-            
+            </Stack>
             <Flex direction='column' align='center' flex='1'>
                 </Flex>  
-            </Stack>      
+            </Stack>   
+            <Flex direction='column' align='center' flex='1'>
+                <OrderSummary checkoutScreen={true} />
+            </Flex>   
         </Box>
   ) : (
     <Navigate to='/login' replace={true} state={{ from: location }} />
