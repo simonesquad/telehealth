@@ -30,7 +30,7 @@ const stripePayment = async (req, res) => {
 
     data.cartItems.forEach((item) => {
         lineItems.push({
-            price: item.stripeID,
+            price: item.stripeId,
             quantity: item.qty,
         });
     });

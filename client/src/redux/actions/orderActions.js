@@ -7,7 +7,7 @@ export const setAddress = (data) => (dispatch) => {
 
 export const setPayment = () => async (dispatch, getState) => {
     const {
-        cart: {cartItems, subtotal, shipping },
+        cart: { cartItems, subtotal, shipping },
         order: { shippingAddress },
         user: { userInfo },
     } = getState();
