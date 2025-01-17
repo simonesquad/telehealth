@@ -10,6 +10,33 @@ const getOrders = async (req, res) => {
     res.json(orders);
 };
 
+const deleteOrder = asyncHandler(async (req, res) => {
+    const order = await Order.findByIdAndDelete(req.params.id)
+
+    if(order) {
+        res.json(order)
+    } else {
+        res.status(404)
+        throw new Error('Order not found.');
+    }
+});
+
+const setDelivered = asyncHandler(async (req, res) => {
+    const order = await Order.findyById(req.params.id)
+
+    if(order) {
+        order.isDelivered = true;
+        const updateOrder = await order.save()
+        res.json(updatedOrder)
+    } else {
+        res.status(404)
+        throw new Error('Order could not be updated.');
+    }
+});
+
 orderRoutes.route('/').get(protectRoute, admin, getOrders);
+orderRoutes.route('/:id').put(protectRoute, admin, setDelivered);
+orderRoutes.route('/id').delete(protectRoute, admin, deleteOrder);
+
 
 export default orderRoutes;
