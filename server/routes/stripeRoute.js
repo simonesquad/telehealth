@@ -13,6 +13,9 @@ const stripePayment = async (req, res) => {
     const data = req.body;
     console.log(req.body);
 
+    console.log(typeof data.shipping)
+    console.log(typeof 14.99)
+
     let lineItems = [];
 
     if(data.shipping === 14.99) {
