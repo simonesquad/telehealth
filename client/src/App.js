@@ -23,21 +23,22 @@ import SuccessScreen from './screens/SuccessScreen';
 
 
 function App() {
-  const [ googleClient, setGoogleClient ] = useState(null);
-  useEffect(() => {
-    const googleKey = async () => {
-      const { data: googleId } = await axios.get('/api/config/google');
-      setGoogleClient(googleId);
-    };
-    googleKey();
-  }, [googleClient]);
-
-  return !googleClient ? (
+  // const [ googleClient, setGoogleClient ] = useState(null);
+  // useEffect(() => {
+  //   const googleKey = async () => {
+  //     const { data: googleId } = await axios.get('/api/config/google');
+  //     setGoogleClient(googleId);
+  //   };
+  //   googleKey();
+  // }, [googleClient]);
+// !googleClient ?
+  return (
+    <>
     <VStack pt='37vh'>
       <Spinner mt='20' thickness='2px' speed='0.65s' emptyColor='gray.200' color='cyan.500' size='xl' />
     </VStack>
-    ):(
-      <GoogleOAuthProvider cliientId={googleClient}>
+    {/* // ):(
+      // <GoogleOAuthProvider cliientId={googleClient}> */}
         <ChakraProvider>
             <Router>
                 <Header />
@@ -60,7 +61,8 @@ function App() {
                 <Footer />
             </Router>
         </ChakraProvider>
-    </GoogleOAuthProvider>
+        </>
+    // </GoogleOAuthProvider>
     );
 }
 
