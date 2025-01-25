@@ -186,9 +186,8 @@ const Header = () => {
                                 <>
                                 <MenuDivider />
                                 <Link to='/admin-console'>
-                                <MenuItem>
-                                    Admin Console
-                                </MenuItem>
+                                <MdOutlineAdminPanelSettings />
+                                <Text ml='2'>Admin Console</Text>
                         </Link>
                                 </>
                             )}

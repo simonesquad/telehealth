@@ -1,20 +1,20 @@
+import dotenv from 'dotenv';
+dotenv.congif();
+
 import express from 'express';
 import Stripe from 'stripe';
 import Order from '../models/Order.js';
 import Product from '../models/Product.js';
+import {} from '../middleware/authMiddleware.js';
 
 const stripe = new Stripe(
-    ''
+    process.env.STRIPE_SECRET_KEY
 );
 
 const stripeRoute = express.Router();
 
 const stripePayment = async (req, res) => {
     const data = req.body;
-    console.log(req.body);
-
-    console.log(typeof data.shipping)
-    console.log(typeof 14.99)
 
     let lineItems = [];
 
@@ -71,6 +71,6 @@ const stripePayment = async (req, res) => {
     );
 };
 
-stripeRoute.route('/').post(stripePayment);
+stripeRoute.route('/').post(protectRoute, stripePayment);
 
 export default stripeRoute;

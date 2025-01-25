@@ -19,6 +19,7 @@ import CheckoutScreen from './screens/CheckoutScreen';
 import YourOrdersScreen from './screens/YourOrdersScreen';
 import CancelScreen from './screens/CancelScreen';
 import SuccessScreen from './screens/SuccessScreen';
+import AdminConsoleScreen from './screens/AdminConsoleScreen';
 
 
 
@@ -56,6 +57,7 @@ function App() {
                     <Route path='/cancel' element={<CancelScreen />} />
                     <Route path='/order-history' element={<YourOrdersScreen />} />
                     <Route path='/success' element={<SuccessScreen />} />
+                    <Route path='/success' element={<AdminConsoleScreen />} />
                   </Routes>
                 </main>
                 <Footer />
