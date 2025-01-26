@@ -31,6 +31,11 @@ export const adminSlice = createSlice({
             state.loading = false;
             state.userRemoval = true;
         },
+        orderDelete: (state) => {
+            state.error = null;
+            state.loading = false;
+            state.orderRemoval = true;
+        },
         resetError: (state) => {
             state.error = null;
             state.loading = false;
@@ -53,7 +58,12 @@ export const {
     resetError,
     getOrders,
     getUsers,
-    userDelete
+    userDelete,
+    orderDelete
 } =
 
 adminSlice.actions;
+
+export default adminSlice.reducer;
+
+export const adminSelector = (state) => state.admin;
