@@ -21,9 +21,20 @@ export const getAllUsers = () => async (dispatch, getState) => {
         user: { userInfo },
     } = getState();
 
-    const config = { headers: { Authorization: `Bearer ${userInfo.token}`, } }; 
+    const config = { headers: { Authorization: `Bearer ${userInfo.token}`, 'Content-Type': 'application/json' } }; 
 
-    
+    try {
+        const { data } = await axios.get('api/users', config);
+    } catch (error) {
+        setError(
+            error.response && error.responde.data.message
+            ? error.response.data.message
+            : error.message
+            ? error.message
+            : 'An expected error has occured. Please try again later.'
+        );
+    }
+
 };
 
 
