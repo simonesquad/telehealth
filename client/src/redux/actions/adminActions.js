@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { 
-    etProducts, 
+    setProducts, 
     setProductUpdateFlag, 
     setReviewRemovalFlag } 
 from '../slices/product';
@@ -147,8 +147,13 @@ export const updateProduct = (
     const config = { headers: { Authorization: `Bearer ${userInfo.token}`, 'Content-Type': 'application/json' } }; 
 
     try {
-        await axios.put('api/products', config);
-        dispatch(setDeliveredFlag());
+        const { data } = await axios.put(
+            'api/products',
+            { brand, name, category, stock, price, id, productIsNew, description }, 
+            config
+        );
+        dispatch(setProducts(data));
+        dispatch(setProductUpdateFlag());
     } catch (error) {
         setError(
             error.response && error.responde.data.message
