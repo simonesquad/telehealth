@@ -91,7 +91,7 @@ export const deleteOrder = (id) => async (dispatch, getState) => {
 
     try {
         const { data } = await axios.delete(`api/orders/${id}`, config);
-        dispatch(userDelete(data));
+        dispatch(orderDelete(data));
     } catch (error) {
         setError(
             error.response && error.responde.data.message
@@ -197,9 +197,9 @@ export const removeReview = (productId, reviewId) => async (dispatch, getState) 
     const config = { headers: { Authorization: `Bearer ${userInfo.token}`, 'Content-Type': 'application/json' } }; 
 
     try {
-        const { data } = await axios.put(`api/products${productId}/${reviewId}`, config);
+        const { data } = await axios.put(`api/products${productId}/${reviewId}`, {}, config);
         dispatch(setProducts(data));
-        dispatch(setProductUpdateFlag());
+        dispatch(setReviewRemovalFlag());
     } catch (error) {
         setError(
             error.response && error.responde.data.message
@@ -210,6 +210,32 @@ export const removeReview = (productId, reviewId) => async (dispatch, getState) 
         );
     }
 };
+
+export const deleteProduct = (id) => async (dispatch, getState) => {
+    setLoading();
+    const {
+        user: { userInfo },
+    } = getState();
+
+    const config = { headers: { Authorization: `Bearer ${userInfo.token}`, 'Content-Type': 'application/json' } }; 
+
+    try {
+        const { data } = await axios.put(`api/products${id}`, config);
+        dispatch(setProducts(data));
+        dispatch(setReviewRemovalFlag());
+        dispatch(resetError());
+    } catch (error) {
+        setError(
+            error.response && error.responde.data.message
+            ? error.response.data.message
+            : error.message
+            ? error.message
+            : 'An expected error has occured. Please try again later.'
+        );
+    }
+};
+
+
 
 
 
