@@ -165,6 +165,34 @@ export const updateProduct = (
     }
 };
 
+export const uploadProduct = (newProduct) => async (dispatch, getState) => {
+    setLoading();
+    const {
+        user: { userInfo },
+    } = getState();
+
+    const config = { headers: { Authorization: `Bearer ${userInfo.token}`, 'Content-Type': 'application/json' } }; 
+
+    try {
+        const { data } = await axios.post(`api/products`, newProduct, config);
+        dispatch(setProducts(data));
+        dispatch(setProductUpdateFlag());
+    } catch (error) {
+        setError(
+            error.response && error.responde.data.message
+            ? error.response.data.message
+            : error.message
+            ? error.message
+            : 'An expected error has occured. Please try again later.'
+        );
+    }
+};
+
+
+
+
+
+
 
 
 
