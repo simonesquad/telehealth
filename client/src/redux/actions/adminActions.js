@@ -188,6 +188,29 @@ export const uploadProduct = (newProduct) => async (dispatch, getState) => {
     }
 };
 
+export const removeReview = (productId, reviewId) => async (dispatch, getState) => {
+    setLoading();
+    const {
+        user: { userInfo },
+    } = getState();
+
+    const config = { headers: { Authorization: `Bearer ${userInfo.token}`, 'Content-Type': 'application/json' } }; 
+
+    try {
+        const { data } = await axios.put(`api/products${productId}/${reviewId}`, config);
+        dispatch(setProducts(data));
+        dispatch(setProductUpdateFlag());
+    } catch (error) {
+        setError(
+            error.response && error.responde.data.message
+            ? error.response.data.message
+            : error.message
+            ? error.message
+            : 'An expected error has occured. Please try again later.'
+        );
+    }
+};
+
 
 
 
