@@ -26,6 +26,7 @@ const protectRoute = asyncHandler(async (req, res, next) => {
 });
 
 const admin = (req, res, next) => {
+    console.log
     if(req.user && res.user.isAdmin) {
         next()
     } else {
