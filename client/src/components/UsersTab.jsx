@@ -50,7 +50,69 @@ const UsersTab = () => {
         onOpen();
     };
 
-  return <div>UsersTab</div>;
+  return (
+    <Box>
+        {error && (
+            <Alert status='error'>
+                <AlertIcon />
+                <AlertTitle>Upps!</AlertTitle>
+                <AlertDescription>{error}</AlertDescription>
+            </Alert>
+        )}
+        {loading ? (
+            <Wrap justify='center'>
+                <Stack direction='row' spacing='4'>
+                    <Spinner mt='20' thickness='2px' speed='0.65s' emptyColor='gray.200' color='cyan.500' size='xl'  />
+                </Stack>
+            </Wrap>
+        ) : (
+    <Box>
+        <TableContainer>
+            <Table variant='simple'>
+                <Thead>
+                    <Tr>
+                        <Th>Name</Th>
+                        <Th>Email</Th>
+                        <Th>Registered</Th>
+                        <Th>admin</Th>
+                        <Th>Action</Th>
+                    </Tr>
+                </Thead>
+                <Tbody>
+                    {userList && 
+                        userList.map((user) => (
+                        <Tr key={user._id}>
+                            <Td>
+                                {user.name} {user._id === userInfo._id ? '(You)' : ''}
+                            </Td>
+                            <Td>{user.email}</Td>
+                            <Td>{new Date(user.createdAt).toDateString()}</Td>
+                            <Td>{user.isAdmin ? <CheckCircleIcon color='cyan.500' /> : ''}</Td>
+                            <Td>
+                                <Button 
+                                    isDisabled={user._id === userInfo._id}
+                                    variant='outline'
+                                    onClick={() => openDeleteConfirmBox(user)}>
+                                        Remove User
+                                </Button>
+                            </Td>
+                        </Tr>
+                    ))}
+                </Tbody>
+            </Table>
+        </TableContainer>
+        <ConfirmRemovalAlert 
+            isOpen={isOpen} 
+            onOpen={onOpen} 
+            onClose={onClose} 
+            cancelRef={cancelRef} 
+            itemToDelete={userToDelete}
+            deleteAction={deleteUser}
+        />
+    </Box>
+  )}
+</Box>
+    );
 };
 
 export default UsersTab;
