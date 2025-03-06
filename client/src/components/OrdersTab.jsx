@@ -7,6 +7,7 @@ import {
     Td,
     Thead,
     Tbody,
+    Text,
     Button,
     useDisclosure,
     Alert,
@@ -16,9 +17,10 @@ import {
     AlertTitle,
     AlertDescription,
     Wrap,
-    useToast
+    useToast,
+    Flex,
 } from '@chakra-ui/react';
-import { CheckCircleIcon, DeleteIcon } from '@chakra-ui/icons';
+import { CheckCircleIcon, DeleteIcon, TbTruckDelivery } from '@chakra-ui/icons';
 import { useEffect, useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllOrders, deleteOrder, resetErrorAndRemoval, setDelivered } from '../redux/actions/adminActions';
@@ -95,21 +97,52 @@ const OrdersTab = () => {
                     </Tr>
                 </Thead>
                 <Tbody>
-                    {userList && 
-                        userList.map((user) => (
-                        <Tr key={user._id}>
+                    {orders && 
+                        orders.map((order) => (
+                        <Tr key={order._id}>
+                            <Td>{ new Date(order.createdAt).toDateString()}</Td> 
+                            <Td>{order.username}</Td>
+                            <Td>{order.email}</Td>
                             <Td>
-                                {user.name} {user._id === userInfo._id ? '(You)' : ''}
+                                <Text>
+                                    <i>Address: </i> {order.shippingAddress.address}
+                                </Text>
+                                <Text>
+                                    <i>City: </i> {order.shippingAddress.postalCode}
+                                    {order.shippingAddress.city}
+                                </Text>
+                                <Text>
+                                    <i>Country: </i> {order.shippingAddress.country}
+                                </Text>
                             </Td>
-                            <Td>{user.email}</Td>
-                            <Td>{new Date(user.createdAt).toDateString()}</Td>
-                            <Td>{user.isAdmin ? <CheckCircleIcon color='cyan.500' /> : ''}</Td>
+                            <Td>
+                                {order.orderItems.map((item) => (<Text key={item._id}>
+                                {item.qty} x {item.name}
+                            </Text>
+                            ))}
+                            </Td>
+                            <Td>${order.shippingPrice}</Td>
+                            <Td>${order.totalPrice}</Td>
+                            <Td>${order.isDelivered ? <CheckCircleIcon /> : 'Pending'}</Td>
+                            <Td>
+                                <Flex direction='column'>
+                                <Button variant='outline' onClick={() => openDeleteConfirmBox(order)}>
+                                    <DeleteIcon mr='5px' />
+                                    Remove Order
+                                </Button>
+                                {!order.isDelivered && (
+                                    <Button mt='4px' variant='outline' onClick={() => onSetToDelivered(order)}>
+                                        <TbTruckDelivery /> 
+                                        <Text ml='5px'>Delivered</Text>
+                                    </Button>
+                                )}
+                                </Flex></Td>
                             <Td>
                                 <Button 
                                     leftIcon={<DeleteIcon />}
-                                    isDisabled={user._id === userInfo._id}
+                                    isDisabled={order._id === userInfo._id}
                                     variant='outline'
-                                    onClick={() => openDeleteConfirmBox(user)}>
+                                    onClick={() => openDeleteConfirmBox(order)}>
                                         Remove User
                                 </Button>
                             </Td>
@@ -123,8 +156,8 @@ const OrdersTab = () => {
             onOpen={onOpen} 
             onClose={onClose} 
             cancelRef={cancelRef} 
-            itemToDelete={userToDelete}
-            deleteAction={deleteUser}
+            itemToDelete={orderToDelete}
+            deleteAction={deleteOrder}
         />
     </Box>
   )}
