@@ -42,7 +42,9 @@ const AdminConsoleScreen = () => {
                     <TabPanel>
                         <OrdersTab />
                     </TabPanel>
-                    <TabPanel></TabPanel>
+                    <TabPanel>
+                        <ReviewsTab />
+                    </TabPanel>
                     <TabPanel></TabPanel>
                     <TabPanel></TabPanel>
                     <TabPanel></TabPanel>
