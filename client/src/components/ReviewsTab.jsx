@@ -23,7 +23,8 @@ import {
     AccordionPanel,
     Flex,
     Text,
-
+    Textarea,
+    Spacer,
 } from '@chakra-ui/react';
 import { useEffect, useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -48,6 +49,10 @@ const ReviewsTab = () => {
             });
         }
     }, [dispatch, toast, reviewRemoval, loading]);
+
+    const onRemoveReview = (productId, reviewId) => {
+        dispatch(removeReview(productId, reviewId));
+    };
 
   return (
     <Box>
@@ -101,8 +106,15 @@ const ReviewsTab = () => {
                                                         <Tr key={review._id}>
                                                             <Td>{review.name}</Td>
                                                             <Td>{review.name}</Td>
-                                                            <Td>{review.name}</Td>
+                                                            <Td>{review.title}</Td>
+                                                            <Td>
+                                                                <Textarea isDisabled value={review.comment} size='sm'/>
+                                                            </Td>
+                                                            <Td>
+                                                                <Button variant='outline' colorScheme='red' onClick={() => onRemoveReview(product._id, review._id)}>Remove Review</Button>
+                                                            </Td>
                                                         </Tr>
+
                                                     ))}
                                                 </Tbody>
                                             </Table>
