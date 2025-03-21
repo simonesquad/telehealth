@@ -139,6 +139,13 @@ const removeProductReview = asyncHandler(async (req, res) => {
         } else {
             product.rating = 1;
         }
+
+        await product.save()
+        const products = await Product.find({})
+        res.json({ products, pagination: {} });
+    } else {
+        res.status(404);
+        throw new Error('Product not found.');
     }
 });
 
