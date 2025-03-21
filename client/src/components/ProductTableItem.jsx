@@ -10,6 +10,7 @@ import {
     Id,
     Textarea,
     Tr,
+    Td,
     VStack,
     useDisclosure,
 } from '@chakra-ui/react';
@@ -36,7 +37,7 @@ const ProductTableItem = ({product}) => {
     const onSaveProduct = () => {
         dispatch(updateProduct(
             brand, 
-            name, 
+            // name, 
             category, 
             stock, 
             price, 
@@ -54,7 +55,25 @@ const ProductTableItem = ({product}) => {
         <>
             <Tr>
                 <Td>
-                    <Textarea w='270px' h='120px' value={description} onChange={} />
+                    <Textarea 
+                        w='270px' 
+                        h='120px' 
+                        value={description} 
+                        onChange={(e) => setDescription(e.target.value)}
+                        size='sm'
+                    />
+                </Td>
+                <Td>
+                    <Flex direction='column' gap='2'>
+                        <Input size='sm' value={brand} onChange={(e) => setBrand(e.target.value)} />
+                        {/* <Input size='sm' value={name} onChange={(e) => setName(e.target.value)} /> */}
+                    </Flex>
+                </Td>
+                <Td>
+                    <Flex direction='column' gap='2'>
+                        <Input size='sm' value={category} onChange={(e) => setCategory(e.target.value)} />
+                        <Input size='sm' value={price} onChange={(e) => setPrice(e.target.value)} />
+                    </Flex>
                 </Td>
             </Tr>
         </>
@@ -62,4 +81,4 @@ const ProductTableItem = ({product}) => {
 
 }
 
-export default ProductTableItem
+export default ProductTableItem;
