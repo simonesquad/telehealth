@@ -12,6 +12,7 @@ import {
 import { Navigate, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import UsersTab from '../components/UsersTab';
+import ReviewsTab from '../components/ReviewsTab';
 
 const AdminConsoleScreen = () => {
     const { userInfo } = useSelector((state) => state.user);

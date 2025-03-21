@@ -140,7 +140,7 @@ const removeProductReview = asyncHandler(async (req, res) => {
             product.rating = 1;
         }
 
-        await product.save()
+        await product.save();
         const products = await Product.find({})
         res.json({ products, pagination: {} });
     } else {
