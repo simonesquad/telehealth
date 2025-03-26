@@ -75,7 +75,43 @@ const ProductTableItem = ({product}) => {
                         <Input size='sm' value={price} onChange={(e) => setPrice(e.target.value)} />
                     </Flex>
                 </Td>
+                <Td>
+                    <Flex direction='column' gap='2'>
+                        <Input size='sm' value={stock} onChange={(e) => setStock(e.target.value)} />
+                        <FormControl display='flex' alignItems='center'>
+                        <FormLabel htmlFor='productIsNewFlag' mb='0' fontSize='sm'>
+                            Enable
+                            <Badge rounded='full' px='1' mx='1' fontSize='0.8em'>
+                                New
+                            </Badge>
+                            badge ?
+                        </FormLabel> 
+                        <Switch id='productIsNewFlag' onChange={() => setProductIsNew(!productIsNew)} isChecked={productIsNew} />   
+                        </FormControl> 
+                    </Flex>
+                </Td>
+                <Td>
+                    <VStack>
+                        <Button colorScheme='red' w='160px' variant='outline' onClick={openDeleteConfirmBox}>
+                            <DeleteIcon mr='5px' />
+                            Remove Product
+                        </Button>
+
+                        <Button colorScheme='green' w='160px' variant='outline' onClick={onSaveProduct}>
+                            <MdOutlineDataSaverOn style={{ marginRight: '5px' }} />
+                            Save Changes
+                        </Button>
+                    </VStack>
+                </Td>
             </Tr>
+            <ConfirmRemovalAlert 
+                isOpen={isOpen}
+                onOpen={onOpen}
+                onClose={onClose}
+                cancelRef={cancelRef}
+                itemToDelete={product} 
+                deleteAction={deleteProduct}
+            />
         </>
     )
 
