@@ -6,13 +6,14 @@ import {
     TabList,
     Tab,
     TabPanel,
-    TabPanels,
-    OrdersTab
+    TabPanels
 } from '@chakra-ui/react';
 import { Navigate, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import UsersTab from '../components/UsersTab';
 import ReviewsTab from '../components/ReviewsTab';
+import ProductsTab from '../components/ProductsTab';
+import OrdersTab from '../components/OrdersTab';
 
 const AdminConsoleScreen = () => {
     const { userInfo } = useSelector((state) => state.user);
@@ -41,10 +42,13 @@ const AdminConsoleScreen = () => {
                         <UsersTab />
                     </TabPanel>
                     <TabPanel>
-                        <OrdersTab />
+                        <ProductsTab />
                     </TabPanel>
                     <TabPanel>
                         <ReviewsTab />
+                    </TabPanel>
+                    <TabPanel>
+                        <OrdersTab />
                     </TabPanel>
                     <TabPanel></TabPanel>
                     <TabPanel></TabPanel>
