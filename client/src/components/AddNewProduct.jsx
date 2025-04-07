@@ -47,7 +47,22 @@ const AddNewProduct = () => {
     };
 
 
-    return <div>AddNewProduct</div>;
+    return (
+        <Tr>
+            <Td>
+                <Text fontSize='sm'>Image File Name 1</Text>
+                <Tooltip label={'Set the name of your first image e.g., iPhone.jpg'}
+                fontSize='sm'>
+                    <Input size='sm' value={imageOne} onChange={(e) => setImageOne(e.target.value)} />
+                </Tooltip>
+                <Spacer />
+                <Text fontSize='sm'>Image File Name 2</Text>
+                <Tooltip label={'Set the name of your second image e.g., iPhone.jpg'} fontSize='sm'>
+                    <Input size='sm' value={imageTwo} onChange={(e) => setImageTwo(e.target.value)} />
+                </Tooltip>
+            </Td>
+        </Tr>
+    )
 
 };
 
