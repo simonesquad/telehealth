@@ -61,9 +61,31 @@ const AddNewProduct = () => {
                     <Input size='sm' value={imageTwo} onChange={(e) => setImageTwo(e.target.value)} />
                 </Tooltip>
             </Td>
-        </Tr>
-    )
+            <Td>
+                <Text fontSize='sm'>Description</Text>
+                <Textarea 
+                    value={description} 
+                    w='270px' 
+                    h='120px' 
+                    onChange={(e) => setDescription(e.target.value)} placeholder='Description'
+                    size='sm'
+                />         
+            </Td>
+            <Td>
+                <Text fontSize='sm'>Brand</Text>
+                <Input size='sm' value={brand} onChange={(e) => setBrand(e.target.value)} placeholder='Apple or Samsung et.' />
+                <Input size='sm' value={name} onChange={(e) => setBrand(e.target.value)} placeholder='Samsung 523' />
+            </Td>
+            <Td>
+                <Text fontSize='sm'>Category</Text>
+                <Input size='sm' value={category} onChange={(e) => setCategory(e.target.value)} placeholder='Smartphone' />
+                <Text fontSize='sm'>Price</Text>
+                <Input size='sm' value={category} onChange={(e) => setCategory(e.target.value)} placeholder='299.99' />
+            </Td>
 
+            <Td></Td>
+        </Tr>
+    );
 };
 
 export default AddNewProduct;
