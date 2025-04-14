@@ -83,7 +83,33 @@ const AddNewProduct = () => {
                 <Input size='sm' value={category} onChange={(e) => setCategory(e.target.value)} placeholder='299.99' />
             </Td>
 
-            <Td></Td>
+            <Td>
+                <Text fontSize='sm'>Stock</Text>
+                <Input size='sm' value={stock} onChange={(e) => setStock(e.target.value)} />
+                <Text fontSize='sm'>New badge shown on product card.</Text>
+                <FormControl display='flex' alignItems='center'>
+                    <FormLabel 
+                        htmlFor='productIsNewFlag' 
+                        mb='0' 
+                        fontSize='sm'>
+                        Enable
+                        <Badge rounded='full' px='1' mx='1' fontSize='0.8em' colorScheme='green'>
+                            new
+                        </Badge>
+                    </FormLabel>
+                    <Switch 
+                        id='productIsNewFlag' 
+                        onChange={() => setProductIsNew(productIsNew)} 
+                        isChecked={productIsNew} 
+                        />
+                </FormControl>
+            </Td>
+            <Td>
+                <VStack>
+                    <Button variant='outline' w='160px' colorScheme='cyan' onClick={createNewProduct}><Text ml='2'>Save Product</Text></Button>
+                </VStack>
+            </Td>
+
         </Tr>
     );
 };
