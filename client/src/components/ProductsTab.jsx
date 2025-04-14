@@ -29,7 +29,7 @@ import ProductTableItem from './ProductTableItem';
 const ProductsTab = () => {
     const dispatch = useDispatch();
     const { error, loading } = useSelector((state) => state.admin);
-    const { products, prooductUpdate } = useSelector((state) => state.product);
+    const { products, productUpdate } = useSelector((state) => state.product);
     const toast = useToast();
 
 
