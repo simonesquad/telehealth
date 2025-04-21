@@ -19,6 +19,7 @@ import { MdDriveFolderUpload } from 'react-icons/md';
 import { useDispatch } from 'react-redux';
 import { uploadProduct } from '../redux/actions/adminActions';
 
+
 const AddNewProduct = () => {
     const dispatch = useDispatch();
     const [brand, setBrand] = useState('');
