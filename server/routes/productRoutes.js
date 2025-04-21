@@ -76,23 +76,25 @@ const createProductReview = asyncHandler(async (req, res) => {
 });
 
 const createNewProduct = asyncHandler(async (req, res) => {
-    const { brand, name, category, stock, price, images, productIsNew, description } = req.body
+    const { brand, name, category, stock, price, images, productIsNew, description, subtitle } = req.body;
 
     const newProduct = await Product.create({
         brand,
         name,
         category,
+        subtitle,
+        description,
         stock,
         price,
         images,
         productIsNew,
-        description,
+        stripeId: 0,
     });
 
-    await newProduct.save()
+    await newProduct.save();
 
     if(newProduct) {
-        res.json()
+        res.json(products);
     } else {
         res.status(404)
         throw new Error('Product could not be uploaded.');
@@ -100,18 +102,20 @@ const createNewProduct = asyncHandler(async (req, res) => {
 });
 
 const updateProduct = asyncHandler(async(req, res) => {
-    const {brand, name, category, stock, price, id, productIsNew, desciption } = req.body;
+    const {brand, name, category, stock, price, id, productIsNew, description, subtitle, stripeId } = req.body;
 
     const product = await Product.findById(id)
 
     if(product) {
         product.name = name;
+        product.subtitle = subtitle;
         product.price = price;
         product.description = description;
         product.brand = brand;
         product.category = category;
         product.stock = stock;
         product.productIsNew = productIsNew;
+        product.stripeId = stripeId;
 
         await product.save();
 
