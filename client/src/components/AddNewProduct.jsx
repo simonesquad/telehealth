@@ -42,6 +42,8 @@ const AddNewProduct = () => {
                 category,
                 stock,
                 price,
+                stripeId,
+                subtitle,
                 image: [`/images/${imageOne}`, `/images/${imageTwo}`],
                 productIsNew,
                 description,
