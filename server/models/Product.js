@@ -58,6 +58,7 @@ const productSchema = new mongoose.Schema({
     },
     stripeId: {
         type: String,
+        default: 0, 
     },
 
 } , { timestamp: true }
