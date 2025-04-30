@@ -30,6 +30,8 @@ const AddNewProduct = () => {
     const [productIsNew, setProductIsNew] = useState('');
     const [description, setDescription] = useState('');
     const [imageOne, setImageOne] = useState('');
+    const [subtitle, setSubtitle] = useState('');
+    const [stripeId, setStripeId] = useState('');
     const [imageTwo, setImageTwo] = useState('');
 
     const createNewProduct = () => {
@@ -84,6 +86,8 @@ const AddNewProduct = () => {
                     value={stripeId}
                     onChange={(e) => setStripeId(e.target.value)}
                 />
+                <Text fontSize='sm'>Subtitle</Text>
+                <Input size='sm' value={subtitle} onChange={(e) => setSubtitle(e.target.value)} placeholder='Samsung S23...' />
             </Td>
             <Td>
                 <Text fontSize='sm'>Category</Text>
