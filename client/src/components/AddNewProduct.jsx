@@ -78,6 +78,14 @@ const AddNewProduct = () => {
                 <Input size='sm' value={name} onChange={(e) => setBrand(e.target.value)} placeholder='Samsung 523' />
             </Td>
             <Td>
+                <Text fontSize='sm'>StripeId</Text>
+                <Input 
+                    size='sm'
+                    value={stripeId}
+                    onChange={(e) => setStripeId(e.target.value)}
+                />
+            </Td>
+            <Td>
                 <Text fontSize='sm'>Category</Text>
                 <Input size='sm' value={category} onChange={(e) => setCategory(e.target.value)} placeholder='Smartphone' />
                 <Text fontSize='sm'>Price</Text>
