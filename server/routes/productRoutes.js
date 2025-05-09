@@ -76,7 +76,7 @@ const createProductReview = asyncHandler(async (req, res) => {
 });
 
 const createNewProduct = asyncHandler(async (req, res) => {
-    const { brand, name, category, stock, price, images, productIsNew, description, subtitle } = req.body;
+    const { brand, name, category, stock, price, images, productIsNew, description, subtitle, stripeId } = req.body;
 
     const newProduct = await Product.create({
         brand,
@@ -88,7 +88,7 @@ const createNewProduct = asyncHandler(async (req, res) => {
         price,
         images,
         productIsNew,
-        stripeId: 0,
+        stripeId,
     });
 
     await newProduct.save();
@@ -102,7 +102,7 @@ const createNewProduct = asyncHandler(async (req, res) => {
 });
 
 const updateProduct = asyncHandler(async(req, res) => {
-    const {brand, name, category, stock, price, id, productIsNew, description, subtitle, stripeId } = req.body;
+    const {brand, name, category, stock, price, id, productIsNew, description, subtitle, stripeId, imageOne, imageTwo } = req.body;
 
     const product = await Product.findById(id)
 
@@ -116,6 +116,8 @@ const updateProduct = asyncHandler(async(req, res) => {
         product.stock = stock;
         product.productIsNew = productIsNew;
         product.stripeId = stripeId;
+        product.images = [imageOne, imageTwo];
+
 
         await product.save();
 

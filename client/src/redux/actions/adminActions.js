@@ -139,7 +139,9 @@ export const updateProduct = (
     productIsNew,
     description,
     subtitle,
-    stripeId
+    stripeId,
+    imageOne,
+    imageTwo
 ) => async (dispatch, getState) => {
     setLoading();
     const {
@@ -151,7 +153,20 @@ export const updateProduct = (
     try {
         const { data } = await axios.put(
             'api/products',
-            { brand, name, category, stock, price, id, productIsNew, description, subtitle, stripeId }, 
+            { 
+                brand, 
+                name, 
+                category, 
+                stock, 
+                price, 
+                id, 
+                productIsNew, 
+                description, 
+                subtitle, 
+                stripeId,
+                imageOne,
+                imageTwo
+            }, 
             config
         );
         dispatch(setProducts(data));
