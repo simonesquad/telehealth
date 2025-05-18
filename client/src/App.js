@@ -1,4 +1,4 @@
-import { ChakraProvider } from '@chakra-ui/react';
+import { ChakraProvider, extendTheme } from '@chakra-ui/react';
 import {Route, BrowserRouter as Router, Routes} from 'react-router-dom';
 import Header from './components/Header';
 // screens //
