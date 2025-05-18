@@ -24,6 +24,17 @@ import AdminConsoleScreen from './screens/AdminConsoleScreen';
 
 
 function App() {
+
+  const theme = extendTheme({
+    styles: {
+      global: (props) => ({
+        body: {
+          bg: props.colorMode === 'light' && '#F7FAFC',
+        },
+      }),
+    },
+  });
+
   // const [ googleClient, setGoogleClient ] = useState(null);
   // useEffect(() => {
   //   const googleKey = async () => {
@@ -33,6 +44,7 @@ function App() {
   //   googleKey();
   // }, [googleClient]);
 // !googleClient ?
+
   return (
     <>
     <VStack pt='37vh'>
@@ -40,7 +52,7 @@ function App() {
     </VStack>
     {/* // ):(
       // <GoogleOAuthProvider cliientId={googleClient}> */}
-        <ChakraProvider>
+        <ChakraProvider theme={theme}>
             <Router>
                 <Header />
                 <main>
