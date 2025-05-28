@@ -27,7 +27,7 @@ const setDelivered = asyncHandler(async (req, res) => {
     if(order) {
         order.isDelivered = true;
         const updateOrder = await order.save()
-        res.json(updatedOrder)
+        res.json(updatedOrder);
     } else {
         res.status(404).send('Order could not be uploaded.');
         throw new Error('Order could not be updated.');
